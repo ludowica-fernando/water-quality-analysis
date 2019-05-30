@@ -10,19 +10,20 @@ import esri = __esri;
 export class WaterInfoTimeViewerComponent implements OnInit {
 
   @ViewChild('mapViewNode') private mapViewEl: ElementRef;
-  private _basemap = 'streets';
+  years = [2017, 2018, 2019];
+  selected: number = 0;
 
   constructor() { }
 
   async initializeMap() {
 
     try {
+      var self = this;
 
       const [Map, MapView, FeatureLayer, GraphicsLayer, QueryTask, Query] = await loadModules([
         'esri/Map',
         'esri/views/MapView',
         "esri/layers/FeatureLayer",
-
         "esri/layers/GraphicsLayer",
         "esri/tasks/QueryTask",
         "esri/tasks/support/Query"
@@ -131,17 +132,17 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         document.getElementById("doBtn").addEventListener("click", doQuery);
       });
 
+
       // Executes each time the button is clicked
       var doQuery = function () {
         // Clear the results from a previous query
         resultsLayer.removeAll();
 
-        var startYearText = document.getElementById("attSelect").innerText;
-        var startYear = parseInt(startYearText);
+        var startYear = self.selected
 
-        // console.log(startYear);
+        // console.log("s " + startYear);
         var endYear = startYear + 1;
-        // console.log(endYear);
+        // console.log("e " + endYear);
 
         var startYearStr = ` '${startYear}-01-01' `
         var endYearStr = ` '${endYear}-01-01' `
@@ -151,7 +152,7 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         var expressionSignAnd = "AND ";
 
         var whereQuery = attributeName + expressionSignBetween + startYearStr + expressionSignAnd + endYearStr
-        // console.log(whereQuery);
+        console.log(whereQuery);
 
         params.where = whereQuery;
 
@@ -227,6 +228,11 @@ export class WaterInfoTimeViewerComponent implements OnInit {
     mapView.when(() => {
       console.log("map loaded");
     });
+  }
+
+  selectOption(id) {
+    console.log(id);
+    this.selected = parseInt(id);
   }
 
 }

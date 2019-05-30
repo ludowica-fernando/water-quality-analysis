@@ -1,5 +1,21 @@
 <h3>Water Info List</h3>
 
-<div id="viewDiv">
-  <app-water-info-map></app-water-info-map>
+<div class="viewDiv">
+  <!-- <app-water-info-map></app-water-info-map> -->
+  <app-water-info-time-viewer></app-water-info-time-viewer>
+</div>
+
+<div>
+  <table class="table table-bordered">
+    <thead>
+      <th>Id</th>
+      <th>Location</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let info of waterInfoList">
+        <td>{{ info.id }}</td>
+        <td>{{ info.location.name }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

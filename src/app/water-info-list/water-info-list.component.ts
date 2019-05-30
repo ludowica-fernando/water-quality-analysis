@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WaterinfoService } from '../services/waterinfo.service';
+import { WaterInfo } from '../models/water-info';
 
 @Component({
   selector: 'app-water-info-list',
@@ -7,6 +8,8 @@ import { WaterinfoService } from '../services/waterinfo.service';
   styleUrls: ['./water-info-list.component.css']
 })
 export class WaterInfoListComponent implements OnInit {
+
+  waterInfoList: WaterInfo[] = [];
 
   constructor(private waterInfoService: WaterinfoService) { }
 
@@ -18,6 +21,7 @@ export class WaterInfoListComponent implements OnInit {
     this.waterInfoService.getAll().subscribe(
       data => {
         console.log(data);
+        this.waterInfoList = data;
       },
       error => {
         console.log(error);

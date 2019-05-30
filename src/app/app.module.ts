@@ -11,6 +11,10 @@ import { SelectLocationComponent } from './select-location/select-location.compo
 import { WaterInfoListComponent } from './water-info-list/water-info-list.component';
 import { WaterInfoMapComponent } from './water-info-map/water-info-map.component';
 import { WaterInfoDetailComponent } from './water-info-detail/water-info-detail.component';
+import { LocationListComponent } from './location-list/location-list.component';
+import { LocationDetailComponent } from './location-detail/location-detail.component';
+import { LocationMapComponent } from './location-map/location-map.component';
+import { WaterInfoTimeViewerComponent } from './water-info-time-viewer/water-info-time-viewer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { WaterInfoDetailComponent } from './water-info-detail/water-info-detail.
     SelectLocationComponent,
     WaterInfoListComponent,
     WaterInfoMapComponent,
-    WaterInfoDetailComponent
+    WaterInfoDetailComponent,
+    LocationListComponent,
+    LocationDetailComponent,
+    LocationMapComponent,
+    WaterInfoTimeViewerComponent
   ],
   imports: [
     BrowserModule,

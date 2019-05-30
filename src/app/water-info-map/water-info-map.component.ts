@@ -11,7 +11,7 @@ export class WaterInfoMapComponent implements OnInit {
 
   @ViewChild('mapViewNode') private mapViewEl: ElementRef;
 
-  private _basemap = 'hybrid';
+  private _basemap = 'streets';
 
   constructor() { }
 
@@ -31,25 +31,32 @@ export class WaterInfoMapComponent implements OnInit {
       const map: esri.Map = new Map(mapProperties);
 
       let featureLayer = new FeatureLayer({
-        url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0"
+        url: "https://services6.arcgis.com/7IDhwz9HO1TkqD4I/arcgis/rest/services/water_information/FeatureServer/0"
       });
 
       map.add(featureLayer);
 
-      const spatialProperties: esri.SpatialReferenceProperties = {
-        wkid: 102100
-      };
+      // const spatialProperties: esri.SpatialReferenceProperties = {
+      //   wkid: 102100
+      // };
+
+      // const mapViewProperties: esri.MapViewProperties = {
+      //   container: this.mapViewEl.nativeElement,
+      //   map: map,
+      //   extent: {
+      //     xmin: -9177811,
+      //     ymin: 4247000,
+      //     xmax: -9176791,
+      //     ymax: 4247784,
+      //     spatialReference: spatialProperties
+      //   }
+      // };
 
       const mapViewProperties: esri.MapViewProperties = {
         container: this.mapViewEl.nativeElement,
         map: map,
-        extent: {
-          xmin: -9177811,
-          ymin: 4247000,
-          xmax: -9176791,
-          ymax: 4247784,
-          spatialReference: spatialProperties
-        }
+        zoom: 10,
+        center: [80, 7] // Sets center point of view using longitude,latitude
       };
 
       const mapView: esri.MapView = new MapView(mapViewProperties)
@@ -69,7 +76,7 @@ export class WaterInfoMapComponent implements OnInit {
 
   houseKeeping(mapView) {
     mapView.when(() => {
-
+      console.log("map loaded");
     });
   }
 

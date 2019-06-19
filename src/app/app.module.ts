@@ -16,6 +16,7 @@ import { LocationListComponent } from './location-list/location-list.component';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { LocationMapComponent } from './location-map/location-map.component';
 import { WaterInfoTimeViewerComponent } from './water-info-time-viewer/water-info-time-viewer.component';
+import { NavbarComponent } from './other/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { WaterInfoTimeViewerComponent } from './water-info-time-viewer/water-inf
     LocationListComponent,
     LocationDetailComponent,
     LocationMapComponent,
-    WaterInfoTimeViewerComponent
+    WaterInfoTimeViewerComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

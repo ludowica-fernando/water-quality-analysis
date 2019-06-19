@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { loadModules } from 'esri-loader';
 import { Options } from 'ng5-slider';
 import esri = __esri;
+import { Filter } from '../models/filter';
 
 @Component({
   selector: 'app-water-info-time-viewer',
@@ -11,18 +12,30 @@ import esri = __esri;
 export class WaterInfoTimeViewerComponent implements OnInit {
 
   @ViewChild('mapViewNode') private mapViewEl: ElementRef;
-  years = [2017, 2018, 2019];
+  years = [2017, 2018, 2019, 2020];
   selected: number = 0;
+  month: number = 1;
 
-  value: number = 2017;
+  filter: Filter = new Filter();
 
   options: Options = {
-    // showSelectionBar: true,
-    floor: 2017,
-    ceil: 2019,
     step: 1,
     showTicks: true,
-    showTicksValues: true
+    showTicksValues: true,
+    stepsArray: [
+      { value: 1, legend: 'January' },
+      { value: 2, legend: 'February' },
+      { value: 3, legend: 'March' },
+      { value: 4, legend: 'April' },
+      { value: 5, legend: 'May' },
+      { value: 6, legend: 'June' },
+      { value: 7, legend: 'July' },
+      { value: 8, legend: 'August' },
+      { value: 9, legend: 'Sep.' },
+      { value: 10, legend: 'Oct.' },
+      { value: 11, legend: 'Nov.' },
+      { value: 12, legend: 'Dec.' }
+    ]
   };
 
   constructor() { }
@@ -128,7 +141,8 @@ export class WaterInfoTimeViewerComponent implements OnInit {
 
       // Call doQuery() each time the button is clicked
       view.when(function () {
-        view.ui.add("optionsDiv", "bottom-right");
+        view.ui.add("filter", "bottom-right");
+        view.ui.add("timeslider", "bottom-left");
         document.getElementById("doBtn").addEventListener("click", doQuery);
       });
 
@@ -138,25 +152,40 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         // Clear the results from a previous query
         resultsLayer.removeAll();
 
-        var startYear = self.value
-        // console.log("s " + startYear);
-        var endYear = startYear + 1;
-        // console.log("e " + endYear);
+        var loc = self.filter.location;
+        var location = ` '${loc}' `
 
-        var startYearStr = ` '${startYear}-01-01' `
-        var endYearStr = ` '${endYear}-01-01' `
 
-        var attributeName = "date ";
+        var yearStart = self.filter.year;
+        var yearEnd = self.filter.year;
+
+        var monthStart = self.month
+        var monthEnd = monthStart + 1;
+
+        if (monthEnd == 13) {
+          monthEnd = 1;
+          yearEnd = yearStart + 1;
+        }
+
+        var startYearStr = ` '${yearStart}-${monthStart}-01' `
+        var endYearStr = ` '${yearEnd}-${monthEnd}-01' `
+
+        var attributeName = "name ";
+        var attributeEqual = "= ";
+        var attributeDate = "date ";
         var expressionSignBetween = "BETWEEN ";
         var expressionSignAnd = "AND ";
 
-        var whereQuery = attributeName + expressionSignBetween + startYearStr + expressionSignAnd + endYearStr
+        var whereQuery = attributeName + attributeEqual + location + expressionSignAnd +
+          attributeDate + expressionSignBetween + startYearStr + expressionSignAnd + endYearStr;
+
         console.log(whereQuery);
 
         params.where = whereQuery;
 
         // executes the query and calls getResults() once the promise is resolved
         // promiseRejected() is called if the promise is rejected
+
         qTask
           .execute(params)
           .then(getResults)
@@ -209,7 +238,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         console.error("Promise rejected: ", error.message);
       }
 
-
       return view;
     }
     catch (error) {
@@ -235,7 +263,22 @@ export class WaterInfoTimeViewerComponent implements OnInit {
   }
 
   onUserChange(id) {
-    console.log(id);
+    // console.log(id);
+    this.month = id;
   }
 
+  onChange(input) {
+
+    if (input.name == 'parameter') {
+      this.filter.parameter = input.value;
+    }
+    else if (input.name == 'location') {
+      this.filter.location = input.value;
+    }
+    else if (input.name == 'year') {
+      this.filter.year = input.value;
+    }
+    // console.log(input.value);
+    console.log(this.filter);
+  }
 }

@@ -1,16 +1,49 @@
 <div #mapViewNode></div>
 
-<div class="esri-widget" id="optionsDiv">
-    <h4>Water Info Time Line</h4>
+<div class="esri-widget" id="filter">
+    <h4>Filter</h4>
 
-    <!-- <select (change)="selectOption($event.target.value)">
-        <option></option>
-        <option [value]="item" *ngFor="let item of years">{{item}}</option>
-    </select> -->
+    <div class="form-group row">
+        <label for="parameter" class="col-sm-4 col-form-label-sm">Parameter</label>
+        <div class="col-sm-8">
+            <select name="parameter" id="parameter" #parameter="ngModel" [(ngModel)]="filter.parameter"
+                (change)="onChange($event)" class="form-control form-control-sm">
+                <option value="ph">ph</option>
+                <option value="cl">cl</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="location" class="col-sm-4 col-form-label-sm">Location</label>
+        <div class="col-sm-8">
+            <select name="location" id="location" #location="ngModel" [(ngModel)]="filter.location"
+                (change)="onChange($event.target)" class="form-control form-control-sm">
+                <option value="Colombo">Colombo</option>
+                <option value="Negombo">Negombo</option>
+                <option value="fish market">fish market</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="year" class="col-sm-4 col-form-label-sm">Year</label>
+        <div class="col-sm-8">
+            <select name="year" id="year" #year="ngModel" [(ngModel)]="filter.year" (change)="onChange($event.target)"
+                class="form-control form-control-sm">
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-success">Save</button>
+
+</div>
+
+<div class="esri-widget" id="timeslider">
 
     <ng5-slider [(value)]="value" (userChange)="onUserChange($event.value)" [options]="options"></ng5-slider>
-
+    <br> <br> <br>
     <button class="btn btn-primary" id="doBtn">View</button> <br />
     <p><span id="printResults"></span></p>
-
 </div>

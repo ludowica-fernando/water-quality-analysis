@@ -2,10 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { Ng5SliderModule } from 'ng5-slider';
+
 import { LocationComponent } from './location/location.component';
 import { SelectLocationComponent } from './select-location/select-location.component';
 import { WaterInfoListComponent } from './water-info-list/water-info-list.component';
@@ -33,7 +34,8 @@ import { WaterInfoTimeViewerComponent } from './water-info-time-viewer/water-inf
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng5SliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

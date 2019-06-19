@@ -1,6 +1,6 @@
 {
     "/api": {
-        "target": "http://water-analysis.herokuapp.com/api",
+        "target": "https://water-analysis.herokuapp.com/api",
         "changeOrigin": true,
         "pathRewrite": {
             "^/api": ""

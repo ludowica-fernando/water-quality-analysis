@@ -7,7 +7,7 @@ import { WaterInfo } from '../models/water-info';
 })
 export class WaterinfoService {
 
-  Api_Url = "/api/waterinfo"
+  Api_Url = "/api/water-info"
 
   constructor(private http: HttpClient) { }
 

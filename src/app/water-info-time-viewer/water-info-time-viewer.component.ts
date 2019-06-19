@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { loadModules } from 'esri-loader';
+import { Options } from 'ng5-slider';
 import esri = __esri;
 
 @Component({
@@ -12,6 +13,17 @@ export class WaterInfoTimeViewerComponent implements OnInit {
   @ViewChild('mapViewNode') private mapViewEl: ElementRef;
   years = [2017, 2018, 2019];
   selected: number = 0;
+
+  value: number = 2017;
+
+  options: Options = {
+    // showSelectionBar: true,
+    floor: 2017,
+    ceil: 2019,
+    step: 1,
+    showTicks: true,
+    showTicksValues: true
+  };
 
   constructor() { }
 
@@ -78,18 +90,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
           "<br><b> hw :</b> {hw})"
       };
 
-      var mtnSymbol = {
-        type: "point-3d", // autocasts as new PointSymbol3D()
-        symbolLayers: [
-          {
-            type: "object", // autocasts as new ObjectSymbol3DLayer()
-            resource: {
-              primitive: "cone"
-            }
-          }
-        ]
-      };
-
       // Create graphics layer and symbol to use for displaying the results of query
       var resultsLayer = new GraphicsLayer();
 
@@ -138,8 +138,7 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         // Clear the results from a previous query
         resultsLayer.removeAll();
 
-        var startYear = self.selected
-
+        var startYear = self.value
         // console.log("s " + startYear);
         var endYear = startYear + 1;
         // console.log("e " + endYear);
@@ -233,6 +232,10 @@ export class WaterInfoTimeViewerComponent implements OnInit {
   selectOption(id) {
     console.log(id);
     this.selected = parseInt(id);
+  }
+
+  onUserChange(id) {
+    console.log(id);
   }
 
 }

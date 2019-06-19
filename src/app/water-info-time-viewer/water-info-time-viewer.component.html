@@ -1,12 +1,14 @@
 <div #mapViewNode></div>
 
 <div class="esri-widget" id="optionsDiv">
-    <h2>Water Info Time Line</h2>
+    <h4>Water Info Time Line</h4>
 
-    <select (change)="selectOption($event.target.value)">
+    <!-- <select (change)="selectOption($event.target.value)">
         <option></option>
         <option [value]="item" *ngFor="let item of years">{{item}}</option>
-    </select>
+    </select> -->
+
+    <ng5-slider [(value)]="value" (userChange)="onUserChange($event.value)" [options]="options"></ng5-slider>
 
     <button class="btn btn-primary" id="doBtn">View</button> <br />
     <p><span id="printResults"></span></p>

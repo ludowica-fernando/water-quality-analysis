@@ -1,18 +1,16 @@
 #optionsDiv {
-background-color: dimgray;
-        color: white;
-        padding: 10px;
-        width: 350px;
-      }
-
-      .esri-popup .esri-popup-header .esri-title {
-        font-size: 18px;
-        font-weight: bolder;
-      }
-
-      .esri-popup .esri-popup-body .esri-popup-content {
-        font-size: 14px;
-      }
-      .esri-view {
-  height: 100%;
+     background-color: dimgray;
+     color: white;
+     padding: 10px;
+     width: 400px;
+}
+ .esri-popup .esri-popup-header .esri-title {
+     font-size: 18px;
+     font-weight: bolder;
+}
+ .esri-popup .esri-popup-body .esri-popup-content {
+     font-size: 14px;
+}
+ .esri-view {
+     height: 100%;
 }

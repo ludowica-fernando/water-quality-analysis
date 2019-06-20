@@ -25,16 +25,15 @@ export class WaterInfoTimeViewerComponent implements OnInit {
     stepsArray: [
       { value: 1, legend: 'January' },
       { value: 2, legend: 'February' },
-      { value: 3, legend: 'March' },
-      { value: 4, legend: 'April' },
-      { value: 5, legend: 'May' },
-      { value: 6, legend: 'June' },
-      { value: 7, legend: 'July' },
-      { value: 8, legend: 'August' },
-      { value: 9, legend: 'Sep.' },
-      { value: 10, legend: 'Oct.' },
-      { value: 11, legend: 'Nov.' },
-      { value: 12, legend: 'Dec.' }
+      { value: 3, legend: 'Average' },
+      { value: 4, legend: 'Good' },
+      { value: 6, legend: 'Excellent' },
+      { value: 7, legend: 'Excellent' },
+      { value: 8, legend: 'Excellent' },
+      { value: 9, legend: 'Excellent' },
+      { value: 10, legend: 'Excellent' },
+      { value: 11, legend: 'Excellent' },
+      { value: 12, legend: 'December' }
     ]
   };
 
@@ -55,7 +54,7 @@ export class WaterInfoTimeViewerComponent implements OnInit {
       ]);
 
       // URL to feature service containing points representing the water info
-      let peaksUrl = "https://services6.arcgis.com/7IDhwz9HO1TkqD4I/arcgis/rest/services/water_information/FeatureServer/0";
+      let peaksUrl = "https://services6.arcgis.com/7IDhwz9HO1TkqD4I/arcgis/rest/services/water_info/FeatureServer/0";
 
       // Define the popup content for each result
       var popupTemplate = {

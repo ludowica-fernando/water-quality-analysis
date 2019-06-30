@@ -3,6 +3,8 @@ import { loadModules } from 'esri-loader';
 import { Options } from 'ng5-slider';
 import esri = __esri;
 import { Filter } from '../models/filter';
+import { Location } from '../models/location';
+import { LocationService } from '../services/location.service';
 
 @Component({
   selector: 'app-water-info-time-viewer',
@@ -12,101 +14,134 @@ import { Filter } from '../models/filter';
 export class WaterInfoTimeViewerComponent implements OnInit {
 
   @ViewChild('mapViewNode') private mapViewEl: ElementRef;
-  years = [2017, 2018, 2019, 2020];
-  selected: number = 0;
-  month: number = 1;
+  // years = [2017, 2018, 2019, 2020];
+  // selected: number = 0;
+  selectedParameter: string = 'pH'
+  // month: number = 1;
 
-  filter: Filter = new Filter();
+  // filter: Filter = new Filter();
 
-  options: Options = {
-    step: 1,
-    showTicks: true,
-    showTicksValues: true,
-    stepsArray: [
-      { value: 1, legend: 'January' },
-      { value: 2, legend: 'February' },
-      { value: 3, legend: 'Average' },
-      { value: 4, legend: 'Good' },
-      { value: 6, legend: 'Excellent' },
-      { value: 7, legend: 'Excellent' },
-      { value: 8, legend: 'Excellent' },
-      { value: 9, legend: 'Excellent' },
-      { value: 10, legend: 'Excellent' },
-      { value: 11, legend: 'Excellent' },
-      { value: 12, legend: 'December' }
-    ]
-  };
+  location: Location = new Location();
 
-  constructor() { }
+  // options: Options = {
+  //   step: 1,
+  //   showTicks: true,
+  //   showTicksValues: true,
+  //   stepsArray: [
+  //     { value: 1, legend: 'January' },
+  //     { value: 2, legend: 'February' },
+  //     { value: 3, legend: 'Average' },
+  //     { value: 4, legend: 'Good' },
+  //     { value: 5, legend: 'Good' },
+  //     { value: 6, legend: 'Excellent' },
+  //     { value: 7, legend: 'Excellent' },
+  //     { value: 8, legend: 'Excellent' },
+  //     { value: 9, legend: 'Excellent' },
+  //     { value: 10, legend: 'Excellent' },
+  //     { value: 11, legend: 'Excellent' },
+  //     { value: 12, legend: 'December' }
+  //   ]
+  // };
+
+  historyData: any[] = [];
+
+  view: any[] = [650, 200];
+  showXAxis = true;
+  showYAxis = true;
+  showDataLabel = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Date';
+  showYAxisLabel = true;
+  yAxisLabel = 'Value';
+
+
+  constructor(private locationService: LocationService) { }
+
 
   async initializeMap() {
 
     try {
       var self = this;
 
-      const [Map, MapView, FeatureLayer, GraphicsLayer, QueryTask, Query] = await loadModules([
+      const [Map, MapView, FeatureLayer, GraphicsLayer, QueryTask, Query, Legend, Expand] = await loadModules([
         'esri/Map',
         'esri/views/MapView',
         "esri/layers/FeatureLayer",
         "esri/layers/GraphicsLayer",
         "esri/tasks/QueryTask",
-        "esri/tasks/support/Query"
+        "esri/tasks/support/Query",
+        "esri/widgets/Legend",
+        "esri/widgets/Expand",
       ]);
 
       // URL to feature service containing points representing the water info
-      let peaksUrl = "https://services6.arcgis.com/7IDhwz9HO1TkqD4I/arcgis/rest/services/water_info/FeatureServer/0";
+      let urlFeature = "https://services6.arcgis.com/7IDhwz9HO1TkqD4I/arcgis/rest/services/water_info/FeatureServer/0";
 
       // Define the popup content for each result
       var popupTemplate = {
-        // autocasts as new PopupTemplate()
         title: "{id}, {name}",
-        fieldInfos: [
+        content: [
           {
-            fieldName: "date",
-            label: "date",
-            format: {
-              dateFormat: 'short-date'
-            }
+            type: "fields",
+            fieldInfos: [
+              {
+                fieldName: "date",
+                label: "date",
+                format: {
+                  dateFormat: 'short-date'
+                }
+              },
+              {
+                fieldName: "hw",
+                label: "hw",
+                format: {
+                  places: 4,
+                  digitSeperator: true
+                }
+              },
+              {
+                fieldName: "longitude",
+                label: "longitude",
+                format: {
+                  places: 4,
+                  digitSeperator: true
+                }
+              },
+              {
+                fieldName: "latitude",
+                label: "latitude",
+                format: {
+                  places: 4,
+                  digitSeperator: true
+                }
+              }
+            ]
           },
           {
-            fieldName: "hw",
-            label: "hw",
-            format: {
-              places: 4,
-              digitSeperator: true
-            }
+            type: "media", // MediaContentElement
+            mediaInfos: [
+              {
+                title: "<b>Mexican Fan Palm</b>",
+                type: "image",
+                caption: "tree species",
+                value: {
+                  sourceURL:
+                    "https://www.sunset.com/wp-content/uploads/96006df453533f4c982212b8cc7882f5-800x0-c-default.jpg"
+                }
+              }
+            ]
           },
-          {
-            fieldName: "longitude",
-            label: "longitude",
-            format: {
-              places: 4,
-              digitSeperator: true
-            }
-          },
-          {
-            fieldName: "latitude",
-            label: "latitude",
-            format: {
-              places: 4,
-              digitSeperator: true
-            }
-          }
         ],
-        content:
-          "<b><a href='https://en.wikipedia.org/wiki/Topographic_prominence'>latitude :</a>" +
-          "</b> {latitude})" +
-          "<br><b><a href='https://en.wikipedia.org/wiki/Topographic_isolation'>longitude :</a>" +
-          "</b> {longitude})" +
-          "<br><b> date :</b> {date}" +
-          "<br><b> hw :</b> {hw})"
+        outFields: ["*"]
       };
 
       // Create graphics layer and symbol to use for displaying the results of query
       var resultsLayer = new GraphicsLayer();
 
       var qTask = new QueryTask({
-        url: peaksUrl
+        url: urlFeature
       });
 
       // Set the query parameters to always return geometry and all fields
@@ -122,7 +157,7 @@ export class WaterInfoTimeViewerComponent implements OnInit {
       });
 
 
-      const mapViewProperties: esri.MapViewProperties = {
+      const view = new MapView({
         container: this.mapViewEl.nativeElement,
         map: map,
         zoom: 10,
@@ -134,65 +169,117 @@ export class WaterInfoTimeViewerComponent implements OnInit {
             breakpoint: false
           }
         }
-      };
-
-      const view: esri.MapView = new MapView(mapViewProperties)
-
-      // Call doQuery() each time the button is clicked
-      view.when(function () {
-        view.ui.add("filter", "bottom-right");
-        view.ui.add("timeslider", "bottom-left");
-        document.getElementById("doBtn").addEventListener("click", doQuery);
       });
 
 
-      // Executes each time the button is clicked
-      var doQuery = function () {
-        // Clear the results from a previous query
-        resultsLayer.removeAll();
+      // init
+      view.when(function () {
 
-        var loc = self.filter.location;
-        var location = ` '${loc}' `
-
-
-        var yearStart = self.filter.year;
-        var yearEnd = self.filter.year;
-
-        var monthStart = self.month
-        var monthEnd = monthStart + 1;
-
-        if (monthEnd == 13) {
-          monthEnd = 1;
-          yearEnd = yearStart + 1;
-        }
-
-        var startYearStr = ` '${yearStart}-${monthStart}-01' `
-        var endYearStr = ` '${yearEnd}-${monthEnd}-01' `
-
-        var attributeName = "name ";
-        var attributeEqual = "= ";
-        var attributeDate = "date ";
-        var expressionSignBetween = "BETWEEN ";
-        var expressionSignAnd = "AND ";
-
-        var whereQuery = attributeName + attributeEqual + location + expressionSignAnd +
-          attributeDate + expressionSignBetween + startYearStr + expressionSignAnd + endYearStr;
-
-        console.log(whereQuery);
-
-        params.where = whereQuery;
-
-        // executes the query and calls getResults() once the promise is resolved
-        // promiseRejected() is called if the promise is rejected
+        params.where = "";
 
         qTask
           .execute(params)
           .then(getResults)
           .catch(promiseRejected);
-      }
+
+
+        const elementHistory = document.getElementById("history");
+
+        const expandHistory = new Expand({
+          view: view,
+          content: elementHistory,
+          expandIconClass: "esri-icon-filter",
+          group: "top-left"
+        });
+
+        view.ui.add(expandHistory, "top-left");
+        // view.ui.add("filter", "bottom-right");
+        // view.ui.add("history", "bottom-left");
+
+        // Call doQuery() each time the button is clicked
+        // document.getElementById("doBtn").addEventListener("click", doQuery);
+      });
+
+
+      view.on("click", function (event) {
+        // console.log(event);
+        view.hitTest(event).then(function (response) {
+          // check if a feature is returned from the resultsLayer
+          const layer = response.results.filter(function (result) {
+            return result.graphic.layer === resultsLayer;
+          });
+
+          const graphic = layer[0].graphic
+
+          // console.log(graphic);
+
+          self.fetchHistory(graphic);
+
+        });
+      });
+
+
+      // Executes each time the button is clicked
+      // var doQuery = function () {
+      //   // Clear the results from a previous query
+      //   resultsLayer.removeAll();
+
+      //   // view.ui.add(legend, "top-right");
+
+      //   var loc = self.filter.location;
+      //   var location = ` '${loc}' `
+
+      //   var yearStart = self.filter.year;
+      //   var yearEnd = self.filter.year;
+
+      //   var monthStart = self.month
+      //   var monthEnd = monthStart + 1;
+
+      //   if (monthEnd == 13) {
+      //     monthEnd = 1;
+      //     yearEnd = yearStart + 1;
+      //   }
+
+      //   var startYearStr = ` '${yearStart}-${monthStart}-01' `
+      //   var endYearStr = ` '${yearEnd}-${monthEnd}-01' `
+
+      //   var attributeName = "name ";
+      //   var expressionSignEqual = "= ";
+      //   var attributeDate = "date ";
+      //   var expressionSignBetween = "BETWEEN ";
+      //   var expressionSignAnd = "AND ";
+
+      //   var whereQuery = "";
+
+      //   var whereQuery = attributeName + expressionSignEqual + location + expressionSignAnd +
+      //     attributeDate + expressionSignBetween + startYearStr + expressionSignAnd + endYearStr;
+
+      //   // if (location != null) {
+      //   //   whereQuery += attributeName + expressionSignEqual + location;
+      //   // }
+
+      //   // if (yearStart != null && monthStart != null && yearEnd != null && monthEnd != null) {
+      //   //   whereQuery += attributeDate + expressionSignBetween + startYearStr + expressionSignAnd + endYearStr;
+      //   // }
+
+      //   console.log(whereQuery);
+
+      //   params.where = whereQuery;
+
+      //   // executes the query and calls getResults() once the promise is resolved
+      //   // promiseRejected() is called if the promise is rejected
+
+      //   qTask
+      //     .execute(params)
+      //     .then(getResults)
+      //     .catch(promiseRejected);
+      // }
 
       // Called each time the promise is resolved
+
       var getResults = function (response) {
+
+        // console.log(response);
 
         // Loop through each of the results and assign a symbol and PopupTemplate
         // to each so they may be visualized on the map
@@ -229,7 +316,7 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         });
 
         // print the number of results returned to the user
-        document.getElementById("printResults").innerHTML = peakResults.length + " results found!";
+        // document.getElementById("printResults").innerHTML = peakResults.length + " results found!";
       }
 
       // Called each time the promise is rejected
@@ -256,28 +343,66 @@ export class WaterInfoTimeViewerComponent implements OnInit {
     });
   }
 
-  selectOption(id) {
-    console.log(id);
-    this.selected = parseInt(id);
+  // selectOption(id) {
+  //   // console.log(id);
+  //   this.selected = parseInt(id);
+  // }
+
+  // onUserChange(id) {
+  //   // console.log(id);
+  //   this.month = id;
+  // }
+
+  // onChange(input) {
+
+  // if (input.name == 'parameter') {
+  //   this.filter.parameter = input.value;
+  // }
+  // else if (input.name == 'location') {
+  //   this.filter.location = input.value;
+  // }
+  // else if (input.name == 'year') {
+  //   this.filter.year = input.value;
+  // }
+  // // console.log(input.value);
+  // // console.log(this.filter);
+  // }
+
+  onChangeParameter(val) {
+    // console.log(val);
+    this.selectedParameter = val;
+    this.processHistory();
   }
 
-  onUserChange(id) {
-    // console.log(id);
-    this.month = id;
+  fetchHistory(graphic) {
+
+    // console.log(graphic);
+
+    let locationId = graphic.attributes.id;
+
+    this.locationService.get(locationId).subscribe(data => {
+
+      // console.log(data);
+      this.location = data;
+      this.processHistory();
+    });
   }
 
-  onChange(input) {
+  processHistory() {
 
-    if (input.name == 'parameter') {
-      this.filter.parameter = input.value;
-    }
-    else if (input.name == 'location') {
-      this.filter.location = input.value;
-    }
-    else if (input.name == 'year') {
-      this.filter.year = input.value;
-    }
-    // console.log(input.value);
-    console.log(this.filter);
+    this.historyData = [];
+
+    this.location.waterInfoSet.forEach(waterInfo => {
+
+      let o = {
+        "name": String(waterInfo.date).split(" ")[0],
+        "value": waterInfo[this.selectedParameter]
+      };
+
+      this.historyData.push(o);
+
+    });
+
+    this.historyData = [...this.historyData];
   }
 }

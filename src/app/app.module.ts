@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { Ng5SliderModule } from 'ng5-slider';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { LocationComponent } from './location/location.component';
 import { SelectLocationComponent } from './select-location/select-location.component';
@@ -17,6 +19,8 @@ import { LocationDetailComponent } from './location-detail/location-detail.compo
 import { LocationMapComponent } from './location-map/location-map.component';
 import { WaterInfoTimeViewerComponent } from './water-info-time-viewer/water-info-time-viewer.component';
 import { NavbarComponent } from './other/navbar/navbar.component';
+import { ManageWaterInfoComponent } from './manage-water-info/manage-water-info.component';
+import { ManageLocationComponent } from './manage-location/manage-location.component';
 
 @NgModule({
   declarations: [
@@ -30,14 +34,18 @@ import { NavbarComponent } from './other/navbar/navbar.component';
     LocationDetailComponent,
     LocationMapComponent,
     WaterInfoTimeViewerComponent,
-    NavbarComponent
+    NavbarComponent,
+    ManageWaterInfoComponent,
+    ManageLocationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    Ng5SliderModule
+	BrowserAnimationsModule,
+    Ng5SliderModule,
+	NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

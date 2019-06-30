@@ -7,11 +7,19 @@ import { WaterInfo } from '../models/water-info';
 })
 export class WaterinfoService {
 
-  Api_Url = "/api/water-info"
+  apiURL = "/api/water-info"
 
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<WaterInfo[]>(this.Api_Url);
+    return this.http.get<WaterInfo[]>(this.apiURL);
+  }
+
+  get(id) {
+    return this.http.get<WaterInfo>(this.apiURL + `/${id}`);
+  }
+
+  addOrUpdate(waterInfo) {
+    return this.http.post(this.apiURL, waterInfo);
   }
 }

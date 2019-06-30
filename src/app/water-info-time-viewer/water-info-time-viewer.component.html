@@ -1,6 +1,6 @@
 <div #mapViewNode></div>
 
-<div class="esri-widget" id="filter">
+<!-- <div class="esri-widget" id="filter">
     <h4>Filter</h4>
 
     <div class="form-group row">
@@ -8,6 +8,7 @@
         <div class="col-sm-8">
             <select name="parameter" id="parameter" #parameter="ngModel" [(ngModel)]="filter.parameter"
                 (change)="onChange($event)" class="form-control form-control-sm">
+                <option value=""></option>
                 <option value="ph">ph</option>
                 <option value="cl">cl</option>
             </select>
@@ -19,8 +20,9 @@
         <div class="col-sm-8">
             <select name="location" id="location" #location="ngModel" [(ngModel)]="filter.location"
                 (change)="onChange($event.target)" class="form-control form-control-sm">
-                <option value="Colombo">Colombo</option>
-                <option value="Negombo">Negombo</option>
+                <option value=""></option>
+                <option value="kandy temple">kandy temple</option>
+                <option value="Viharamahadevi Park, Colombo 07">Viharamahadevi Park, Colombo 07</option>
                 <option value="fish market">fish market</option>
             </select>
         </div>
@@ -31,21 +33,41 @@
         <div class="col-sm-8">
             <select name="year" id="year" #year="ngModel" [(ngModel)]="filter.year" (change)="onChange($event.target)"
                 class="form-control form-control-sm">
+                <option value=""></option>
                 <option value="2019">2019</option>
                 <option value="2018">2018</option>
                 <option value="2017">2017</option>
             </select>
         </div>
     </div>
-    <button class="btn btn-success">Save</button>
-
 </div>
+-->
 
-<div class="esri-widget" id="timeslider">
+<!-- <div class="esri-widget" id="timeslider">
 
     <ng5-slider [(value)]="value" (userChange)="onUserChange($event.value)" [options]="options"></ng5-slider>
     <br> <br> <br>
     <button class="btn btn-primary" id="doBtn">View</button>
     <br><br>
     <p><span id="printResults"></span></p>
+</div> -->
+
+<div class="esri-widget" id="history" *ngIf="historyData">
+
+    <h3>Location - {{ location.name }} </h3>
+
+    <div class="form-group col-md-6">
+        <label for="parameter">Parameter</label>
+        <select name="parameter" id="parameter" class="form-control" [ngModel]="selectedParameter"
+            (ngModelChange)="onChangeParameter($event)">
+            <option value="pH"> pH </option>
+            <option value="rcl"> rcl </option>
+        </select>
+    </div>
+
+    <ngx-charts-bar-vertical [view]="view" [results]="historyData" [gradient]="gradient" [xAxis]="showXAxis"
+        [yAxis]="showYAxis" [legend]="showLegend" showDataLabel="showDataLabel" [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+        (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
 </div>

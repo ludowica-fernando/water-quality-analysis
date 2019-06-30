@@ -1,14 +1,26 @@
+import { Location } from './location';
+
 export class WaterInfo {
     id: number;
-    hw: number;
-    rci: number;
+    coliform: number;
+    colour: number;
+    eColi: number;
+    ec: number;
+    pH: number;
+    rcl: number;
+    turbidity: number;
     date: Date;
     location: Location = new Location();
 
     constructor() {
         this.id = null;
-        this.hw = null;
-        this.rci = null;
+        this.coliform = null;
+        this.colour = null;
+        this.eColi = null;
+        this.ec = null;
+        this.pH = null;
+        this.rcl = null;
+        this.turbidity = null;
         this.date = null;
     }
 }

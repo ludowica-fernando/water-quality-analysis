@@ -16,10 +16,26 @@
 
 #timeslider {
      background-color: white;
-     padding: 35px;
+     padding-left: 30px;
+     padding-right: 35px;
+     padding-top: 30px;
      width: 800px;
      margin: 5px;
 }
+
+#history {
+     background-color: white;
+     padding: 10px;
+     /* visibility: hidden; */
+     height: 350px;
+     width: 100%;
+     /* padding-left: 30px;
+     padding-right: 35px;
+     padding-top: 30px;
+     width: 800px;
+     margin: 5px; */
+}
+
  .esri-popup .esri-popup-header .esri-title {
      font-size: 18px;
      font-weight: bolder;

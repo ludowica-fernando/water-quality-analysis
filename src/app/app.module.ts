@@ -43,9 +43,9 @@ import { ManageLocationComponent } from './manage-location/manage-location.compo
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-	BrowserAnimationsModule,
+    BrowserAnimationsModule,
     Ng5SliderModule,
-	NgxChartsModule
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

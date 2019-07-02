@@ -1,0 +1,116 @@
+<div class="container">
+  <h3>Dashboard</h3>
+
+  <div class="row">
+
+    <div class="col-xl-6 col-md-6 mb-4 text-center">
+      <div class="card border-0 shadow">
+        <div class="card-header text-white bg-dark">Sales Orders</div>
+        <div class="p-1">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let itemRaw of itemRawList" [routerLink]="[itemRaw.id]">
+                <td>{{itemRaw.id}}</td>
+                <td>{{itemRaw.name}}</td>
+                <td>{{itemRaw.quantity}}</td>
+                <td>
+                  <a [routerLink]="[itemRaw.id]">View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xl-6 col-md-6 mb-4 text-center">
+      <div class="card border-0 shadow">
+        <div class="card-header text-white bg-dark">Supplier Orders</div>
+        <div class="p-1">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Created Date</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let supplierOrder of supplierOrderList.slice(0, rowLimit)">
+                <td>{{supplierOrder.id}}</td>
+                <td>{{supplierOrder.createdDate}}</td>
+                <td>{{supplierOrder.status}}</td>
+                <td>
+                  <a [routerLink]=" ['supplier-order', supplierOrder.id]">View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xl-6 col-md-6 mb-4 text-center">
+      <div class="card border-0 shadow">
+        <div class="card-header text-white bg-danger">Item Raw Low Quantity</div>
+        <div class="p-1">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let itemRaw of itemRawList.slice(0, rowLimit)">
+                <td>{{itemRaw.id}}</td>
+                <td>{{itemRaw.name}}</td>
+                <td>{{itemRaw.quantity}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xl-6 col-md-6 mb-4 text-center">
+      <div class="card border-0 shadow">
+        <div class="card-header text-white bg-danger">Item Complete Low Quantity</div>
+        <div class="p-1">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let itemRaw of itemRawList" [routerLink]="[itemRaw.id]">
+                <td>{{itemRaw.id}}</td>
+                <td>{{itemRaw.name}}</td>
+                <td>{{itemRaw.quantity}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

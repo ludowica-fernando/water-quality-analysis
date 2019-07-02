@@ -1,3 +1,4 @@
+import { LocationService } from './../services/location.service';
 import { WaterinfoService } from './../services/waterinfo.service';
 import { Component, OnInit } from '@angular/core';
 import { WaterInfo } from '../models/water-info';
@@ -12,17 +13,26 @@ export class ManageWaterInfoComponent implements OnInit {
   isReadOnly = true;
   id: string;
   waterInfo: WaterInfo = new WaterInfo();
+  locationList = [];
 
   constructor(
     private route: ActivatedRoute,
-    private waterInfoService: WaterinfoService
+    private waterInfoService: WaterinfoService,
+    private locationService: LocationService
   ) { }
 
   ngOnInit() {
 
+    this.locationService.getAll().subscribe(data =>{
+      this.locationList = data;
+    });
+
     this.id = this.route.snapshot.paramMap.get('id');
+
     if (this.id) {
       this.waterInfoService.get(this.id).subscribe((data: WaterInfo) => {
+
+        console.log(data);
         this.waterInfo = data;
       });
     }
@@ -40,6 +50,10 @@ export class ManageWaterInfoComponent implements OnInit {
 
   edit() {
     this.isReadOnly = false;
+  }
+
+  compareByOptionId(idFirst, idSecond) {
+    return idFirst && idSecond && idFirst.id == idSecond.id;
   }
 
 }

@@ -10,8 +10,8 @@
         </div>
         <div class="form-group col-md-3">
             <label for="date">Collected Date</label>
-            <input #date="ngModel" [(ngModel)]="waterInfo.date" name="date" id="date"
-                type="text" class="form-control" [readonly]="true">
+            <input #date="ngModel" [(ngModel)]="waterInfo.date" name="date" id="date" type="text" class="form-control"
+                [readonly]="true">
         </div>
     </div>
 
@@ -62,11 +62,12 @@
 
     <div class="form-row">
         <div class="form-group">
-            <label for="samplingLocation">Sampling Location</label>
-            <input #samplingLocation="ngModel" [(ngModel)]="waterInfo.location.name" name="samplingLocation"
-                id="samplingLocation" type="text" class="form-control col-md-9" required [readonly]="isReadOnly">
-            <div class="invalid-feedback d-block" *ngIf="samplingLocation.touched && samplingLocation.invalid">
-                Sampling Location is Required </div>
+            <label for="location">Sampling Location</label>
+            <select required #location="ngModel" [(ngModel)]="waterInfo.location" [compareWith]="compareByOptionId"
+                name="location" id="location" class="form-control" [disabled]="isReadOnly">
+                <option *ngFor="let location of locationList" [ngValue]="location"> {{location.city}} -
+                    {{location.name}} </option>
+            </select>
         </div>
     </div>
 

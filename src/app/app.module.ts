@@ -21,6 +21,8 @@ import { WaterInfoTimeViewerComponent } from './water-info-time-viewer/water-inf
 import { NavbarComponent } from './other/navbar/navbar.component';
 import { ManageWaterInfoComponent } from './manage-water-info/manage-water-info.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LayoutComponent } from './other/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ManageLocationComponent } from './manage-location/manage-location.compo
     WaterInfoTimeViewerComponent,
     NavbarComponent,
     ManageWaterInfoComponent,
-    ManageLocationComponent
+    ManageLocationComponent,
+    DashboardComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,

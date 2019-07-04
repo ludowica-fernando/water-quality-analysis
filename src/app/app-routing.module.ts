@@ -8,6 +8,7 @@ import { WaterInfoMapComponent } from './water-info-map/water-info-map.component
 import { WaterInfoListComponent } from './water-info-list/water-info-list.component';
 import { WaterInfoDetailComponent } from './water-info-detail/water-info-detail.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
+import { ChartColumnComponent } from './chart-column/chart-column.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -28,6 +29,9 @@ const routes: Routes = [
   { path: 'locations', component: ManageLocationComponent },
   { path: 'locations/new', component: ManageLocationComponent },
   { path: 'locations/:id', component: ManageLocationComponent },
+
+  { path: 'chart-column', component: ChartColumnComponent },
+
 
 ];
 

@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 import { Ng5SliderModule } from 'ng5-slider';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MomentModule } from 'ngx-moment';
 
 import { LocationComponent } from './location/location.component';
 import { SelectLocationComponent } from './select-location/select-location.component';
@@ -23,6 +25,7 @@ import { ManageWaterInfoComponent } from './manage-water-info/manage-water-info.
 import { ManageLocationComponent } from './manage-location/manage-location.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutComponent } from './other/layout/layout.component';
+import { ChartColumnComponent } from './chart-column/chart-column.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { LayoutComponent } from './other/layout/layout.component';
     ManageWaterInfoComponent,
     ManageLocationComponent,
     DashboardComponent,
-    LayoutComponent
+    LayoutComponent,
+    ChartColumnComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { LayoutComponent } from './other/layout/layout.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     Ng5SliderModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MomentModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

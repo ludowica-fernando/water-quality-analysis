@@ -1,9 +1,7 @@
 <h3>Locations</h3>
-
 <form #locationForm="ngForm" (ngSubmit)="onSubmit()" class="mt-4">
 
   <div class="form-row">
-
     <div class="form-group col-md-3">
       <label for="id">Location ID</label>
       <input #id="ngModel" [(ngModel)]="location.id" name="id" id="id" type="text" class="form-control"

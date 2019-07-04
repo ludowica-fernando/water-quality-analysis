@@ -57,6 +57,28 @@ export class WaterInfoTimeViewerComponent implements OnInit {
   yAxisLabel = 'Value';
 
 
+  single: any[] = [
+    {
+      "name": "Germany",
+      "value": 8940000
+    },
+    {
+      "name": "USA",
+      "value": 5000000
+    },
+    {
+      "name": "France",
+      "value": 7200000
+    }
+  ];
+  multi: any[];
+
+  
+  // line, area
+  autoScale = true;
+  
+
+
   constructor(private locationService: LocationService) { }
 
 

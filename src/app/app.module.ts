@@ -24,8 +24,10 @@ import { NavbarComponent } from './other/navbar/navbar.component';
 import { ManageWaterInfoComponent } from './manage-water-info/manage-water-info.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LayoutComponent } from './other/layout/layout.component';
 import { ChartColumnComponent } from './chart-column/chart-column.component';
+import { DefaultLayoutComponent } from './other/layouts/default-layout/default-layout.component';
+import { LoaderComponent } from './other/loader/loader.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +45,10 @@ import { ChartColumnComponent } from './chart-column/chart-column.component';
     ManageWaterInfoComponent,
     ManageLocationComponent,
     DashboardComponent,
-    LayoutComponent,
-    ChartColumnComponent
+    ChartColumnComponent,
+    DefaultLayoutComponent,
+    LoaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

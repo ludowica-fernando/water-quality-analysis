@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,12 +12,10 @@ export class NavbarComponent implements OnInit {
   authority: string;
 
   constructor(
-    private tokenService: TokenStorageService,
   ) { }
 
   ngOnInit() {
-    this.username = this.tokenService.getUsername();
-    this.authority = this.tokenService.getAuthority();
+    // this.username = this.tokenService.getUsername();
   }
 
   toggleNavbar() {
@@ -26,7 +23,8 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.tokenService.signout();
+    // this.tokenService.signout();
     window.location.reload();
   }
+
 }

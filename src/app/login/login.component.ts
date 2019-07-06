@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       switch (this.tokenStorage.getAuthority()) {
 
         case 'ROLE_ADMIN':
-          this.router.navigateByUrl('admin/home');
+          this.router.navigateByUrl('');
           break;
         case 'ROLE_MM':
           this.router.navigateByUrl('');

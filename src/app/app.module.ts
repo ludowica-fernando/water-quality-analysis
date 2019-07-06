@@ -24,14 +24,18 @@ import { NavbarComponent } from './other/navbar/navbar.component';
 import { ManageWaterInfoComponent } from './manage-water-info/manage-water-info.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LayoutComponent } from './other/layout/layout.component';
 import { ChartColumnComponent } from './chart-column/chart-column.component';
-import { DefaultLayoutComponent } from './other/layouts/default-layout/default-layout.component';
+import { LayoutLoginComponent } from './other/layout-login/layout-login.component';
 import { LoaderComponent } from './other/loader/loader.component';
 import { LoginComponent } from './login/login.component';
+import { httpLoaderInterceptorProvider } from './loader-interceptor';
+import { httpAuthInterceptorProvider } from './auth-interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoaderComponent,
     LocationComponent,
     SelectLocationComponent,
     WaterInfoListComponent,
@@ -45,9 +49,9 @@ import { LoginComponent } from './login/login.component';
     ManageWaterInfoComponent,
     ManageLocationComponent,
     DashboardComponent,
+    LayoutComponent,
     ChartColumnComponent,
-    DefaultLayoutComponent,
-    LoaderComponent,
+    LayoutLoginComponent,
     LoginComponent
   ],
   imports: [
@@ -59,9 +63,9 @@ import { LoginComponent } from './login/login.component';
     Ng5SliderModule,
     NgxChartsModule,
     MomentModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [httpAuthInterceptorProvider, httpLoaderInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

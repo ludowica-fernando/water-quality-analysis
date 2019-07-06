@@ -27,7 +27,7 @@
      background-color: white;
      padding: 10px;
      /* visibility: hidden; */
-     height: 350px;
+     height: 400px;
      width: 100%;
      /* padding-left: 30px;
      padding-right: 35px;
@@ -45,4 +45,5 @@
 }
  .esri-view {
      height: 90%;
+     margin-top: 70px;
 }

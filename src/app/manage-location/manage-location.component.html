@@ -23,7 +23,7 @@
     <div class="invalid-feedback d-block" *ngIf="name.touched && name.invalid"> Sampling Location is Required </div>
   </div>
 
-  <div class="form-row">
+  <!-- <div class="form-row">
     <div class="form-group col-md-3">
       <label for="longitude">Longitude</label>
       <input #longitude="ngModel" [(ngModel)]="location.longitude" name="longitude" id="longitude" type="text"
@@ -36,8 +36,8 @@
       <input #latitude="ngModel" [(ngModel)]="location.latitude" name="latitude" id="latitude" type="text"
         class="form-control" required [readonly]="isReadOnly">
       <div class="invalid-feedback d-block" *ngIf="latitude.touched && latitude.invalid"> Latitude is Required </div>
-    </div>
-  </div>
+    </div> -->
+  <!-- </div> -->
   <div class="btn-group ml-3" role="group">
     <a routerLink="/supplier" class="btn btn-secondary"> <i class="fa fa-arrow-left"></i>Supplier List </a>
     <button class="btn btn-success" [disabled]="!locationForm.valid || isReadOnly">Save</button>

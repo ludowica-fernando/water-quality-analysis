@@ -2,6 +2,8 @@ import { LocationService } from './../services/location.service';
 import { Location } from './../models/location';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-location',
@@ -16,7 +18,9 @@ export class ManageLocationComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private toastr : ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -35,6 +39,8 @@ export class ManageLocationComponent implements OnInit {
     this.locationService.addOrUpdate(this.location).subscribe(data => {
       console.log(data);
       this.isReadOnly = true;
+      this.toastr.success("Location added!", "Success");
+      this.router.navigateByUrl("/locations/");
     });
   }
 

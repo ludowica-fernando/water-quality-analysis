@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { loadModules } from 'esri-loader';
-import { Options } from 'ng5-slider';
 import esri = __esri;
-import { Filter } from '../models/filter';
 import { Location } from '../models/location';
 import { LocationService } from '../services/location.service';
 
@@ -14,34 +12,10 @@ import { LocationService } from '../services/location.service';
 export class WaterInfoTimeViewerComponent implements OnInit {
 
   @ViewChild('mapViewNode') private mapViewEl: ElementRef;
-  // years = [2017, 2018, 2019, 2020];
-  // selected: number = 0;
-  selectedParameter: string = 'pH'
-  // month: number = 1;
 
-  // filter: Filter = new Filter();
+  selectedParameter: string = 'pH'
 
   location: Location = new Location();
-
-  // options: Options = {
-  //   step: 1,
-  //   showTicks: true,
-  //   showTicksValues: true,
-  //   stepsArray: [
-  //     { value: 1, legend: 'January' },
-  //     { value: 2, legend: 'February' },
-  //     { value: 3, legend: 'Average' },
-  //     { value: 4, legend: 'Good' },
-  //     { value: 5, legend: 'Good' },
-  //     { value: 6, legend: 'Excellent' },
-  //     { value: 7, legend: 'Excellent' },
-  //     { value: 8, legend: 'Excellent' },
-  //     { value: 9, legend: 'Excellent' },
-  //     { value: 10, legend: 'Excellent' },
-  //     { value: 11, legend: 'Excellent' },
-  //     { value: 12, legend: 'December' }
-  //   ]
-  // };
 
   historyData: any[] = [];
 
@@ -56,31 +30,10 @@ export class WaterInfoTimeViewerComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'Value';
 
-
-  single: any[] = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ];
-  multi: any[];
-
-  
   // line, area
   autoScale = true;
-  
-
 
   constructor(private locationService: LocationService) { }
-
 
   async initializeMap() {
 
@@ -109,19 +62,8 @@ export class WaterInfoTimeViewerComponent implements OnInit {
             type: "fields",
             fieldInfos: [
               {
-                fieldName: "date",
-                label: "date",
-                format: {
-                  dateFormat: 'short-date'
-                }
-              },
-              {
-                fieldName: "hw",
-                label: "hw",
-                format: {
-                  places: 4,
-                  digitSeperator: true
-                }
+                fieldName: "city",
+                label: "City"
               },
               {
                 fieldName: "longitude",
@@ -145,9 +87,9 @@ export class WaterInfoTimeViewerComponent implements OnInit {
             type: "media", // MediaContentElement
             mediaInfos: [
               {
-                title: "<b>Mexican Fan Palm</b>",
+                title: "<b>Sample Image</b>",
                 type: "image",
-                caption: "tree species",
+                caption: "Water Info",
                 value: {
                   sourceURL:
                     "https://www.sunset.com/wp-content/uploads/96006df453533f4c982212b8cc7882f5-800x0-c-default.jpg"
@@ -215,11 +157,7 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         });
 
         view.ui.add(expandHistory, "top-left");
-        // view.ui.add("filter", "bottom-right");
-        // view.ui.add("history", "bottom-left");
 
-        // Call doQuery() each time the button is clicked
-        // document.getElementById("doBtn").addEventListener("click", doQuery);
       });
 
 
@@ -365,30 +303,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
     });
   }
 
-  // selectOption(id) {
-  //   // console.log(id);
-  //   this.selected = parseInt(id);
-  // }
-
-  // onUserChange(id) {
-  //   // console.log(id);
-  //   this.month = id;
-  // }
-
-  // onChange(input) {
-
-  // if (input.name == 'parameter') {
-  //   this.filter.parameter = input.value;
-  // }
-  // else if (input.name == 'location') {
-  //   this.filter.location = input.value;
-  // }
-  // else if (input.name == 'year') {
-  //   this.filter.year = input.value;
-  // }
-  // // console.log(input.value);
-  // // console.log(this.filter);
-  // }
 
   onChangeParameter(val) {
     // console.log(val);
@@ -414,17 +328,23 @@ export class WaterInfoTimeViewerComponent implements OnInit {
 
     this.historyData = [];
 
+    let hList = {
+      name: this.selectedParameter,
+      series: []
+    };
+
     this.location.waterInfoSet.forEach(waterInfo => {
 
       let o = {
-        "name": String(waterInfo.date).split(" ")[0],
-        "value": waterInfo[this.selectedParameter]
+        name: String(waterInfo.date).split(" ")[0],
+        value: waterInfo[this.selectedParameter]
       };
 
-      this.historyData.push(o);
-
+      hList.series.push(o);
     });
 
+    this.historyData.push(hList);
     this.historyData = [...this.historyData];
+    // console.log(this.historyData);
   }
 }

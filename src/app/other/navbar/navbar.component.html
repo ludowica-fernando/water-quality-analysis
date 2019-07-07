@@ -1,38 +1,83 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="">Water Board Sri Lanka</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/locations/">Sampling Locations</a>
-      </li>
+<!-- <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="#">Sign out</a>
+    </li>
+  </ul>
+</nav> -->
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="/manage-water-info/">Water Quality Data</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/water-info/">Map</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Charts
+        <a class="nav-link active" href="#">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Column Chart</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="/locations/">
+          <span data-feather="file"></span>
+          Add Sampling Locations
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/manage-water-info/">
+          <span data-feather="shopping-cart"></span>
+          Add Water Quality Data
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/water-info/">
+          <span data-feather="users"></span>
+          View Map
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/chart-column/">
+          <span data-feather="bar-chart-2"></span>
+          Column Chart
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="layers"></span>
+          Integrations
+        </a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Saved reports</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+        <span data-feather="plus-circle"></span>
+      </a>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          Current month
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          Last quarter
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          Social engagement
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file-text"></span>
+          Year-end sale
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>

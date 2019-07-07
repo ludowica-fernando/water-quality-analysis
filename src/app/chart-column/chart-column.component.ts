@@ -46,9 +46,6 @@ export class ChartColumnComponent implements OnInit {
   }
 
   onSubmit() {
-
-    // console.log(this.chartColumnFilter);
-
     this.chartColumnFilter.city;
 
     let _dateStart = this.chartColumnFilter.dateStart;
@@ -60,12 +57,8 @@ export class ChartColumnComponent implements OnInit {
     this.chartColumnFilter.dateStart = dateStart;
     this.chartColumnFilter.dateEnd = dateEnd;
 
-    // console.log(this.chartColumnFilter);
-
     this.waterInfoService.getChartColumn(this.chartColumnFilter).subscribe(
       data => {
-
-        // console.log(data);
         this.chartColumn = data;
         this.prepare();
       },
@@ -82,7 +75,5 @@ export class ChartColumnComponent implements OnInit {
     this.data.push({ name: "turbidity", value: this.chartColumn.turbidity });
 
     this.data = [...this.data];
-
   }
-
 }

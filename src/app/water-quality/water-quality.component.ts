@@ -1,35 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../services/location.service';
 import { WaterinfoService } from '../services/waterinfo.service';
+import { ToastrService } from 'ngx-toastr';
 import { ChartColumnFilter } from '../models/chart-column-filter';
 import { ChartColumn } from '../models/chart-column';
 import * as moment from 'moment';
-import { LocationService } from '../services/location.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-chart-column',
-  templateUrl: './chart-column.component.html',
-  styleUrls: ['./chart-column.component.css']
+  selector: 'app-water-quality',
+  templateUrl: './water-quality.component.html',
+  styleUrls: ['./water-quality.component.css']
 })
-export class ChartColumnComponent implements OnInit {
+export class WaterQualityComponent implements OnInit {
 
   chartColumnFilter: ChartColumnFilter = new ChartColumnFilter();
   chartColumn: ChartColumn = new ChartColumn();
   locationList = [];
-
-  data: any[] = [];
-
-  view: any[] = [700, 400];
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Percentage';
-  showYAxisLabel = true;
-  yAxisLabel = 'Parameter';
+  waterValue : any;
 
   constructor(
     private locationService: LocationService,
@@ -55,23 +42,13 @@ export class ChartColumnComponent implements OnInit {
     this.chartColumnFilter.dateStart = dateStart;
     this.chartColumnFilter.dateEnd = dateEnd;
 
-    this.waterInfoService.getChartColumn(this.chartColumnFilter).subscribe(
+    this.waterInfoService.calculateWaterQuality(this.chartColumnFilter).subscribe(
       data => {
-        this.chartColumn = data;
-        this.prepare();
+        console.log(data);
+        this.waterValue = data;
       },
       error => {
         this.toastr.error("Not Found!", "Error");
       });
-  }
-
-  prepare() {
-
-    this.data.push({ name: "colour", value: this.chartColumn.colour });
-    this.data.push({ name: "pH", value: this.chartColumn.pH });
-    this.data.push({ name: "rcl", value: this.chartColumn.rcl });
-    this.data.push({ name: "turbidity", value: this.chartColumn.turbidity });
-
-    this.data = [...this.data];
   }
 }

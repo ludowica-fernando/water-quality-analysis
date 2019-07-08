@@ -162,7 +162,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
 
 
       view.on("click", function (event) {
-        // console.log(event);
         view.hitTest(event).then(function (response) {
           // check if a feature is returned from the resultsLayer
           const layer = response.results.filter(function (result) {
@@ -170,9 +169,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
           });
 
           const graphic = layer[0].graphic
-
-          // console.log(graphic);
-
           self.fetchHistory(graphic);
 
         });
@@ -238,9 +234,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
       // Called each time the promise is resolved
 
       var getResults = function (response) {
-
-        // console.log(response);
-
         // Loop through each of the results and assign a symbol and PopupTemplate
         // to each so they may be visualized on the map
         var peakResults = response.features.map(function (feature) {
@@ -263,9 +256,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         });
 
         resultsLayer.addMany(peakResults);
-
-        // console.log(resultsLayer)
-
         // animate to the results after they are added to the map
         view.goTo(peakResults).then(function () {
           view.popup.open({
@@ -305,20 +295,14 @@ export class WaterInfoTimeViewerComponent implements OnInit {
 
 
   onChangeParameter(val) {
-    // console.log(val);
     this.selectedParameter = val;
     this.processHistory();
   }
 
   fetchHistory(graphic) {
-
-    // console.log(graphic);
-
     let locationId = graphic.attributes.id;
 
     this.locationService.get(locationId).subscribe(data => {
-
-      // console.log(data);
       this.location = data;
       this.processHistory();
     });
@@ -345,6 +329,5 @@ export class WaterInfoTimeViewerComponent implements OnInit {
 
     this.historyData.push(hList);
     this.historyData = [...this.historyData];
-    // console.log(this.historyData);
   }
 }

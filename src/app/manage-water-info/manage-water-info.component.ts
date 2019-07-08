@@ -3,6 +3,9 @@ import { WaterinfoService } from './../services/waterinfo.service';
 import { Component, OnInit } from '@angular/core';
 import { WaterInfo } from '../models/water-info';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-manage-water-info',
   templateUrl: './manage-water-info.component.html',
@@ -18,7 +21,9 @@ export class ManageWaterInfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private waterInfoService: WaterinfoService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private toastr : ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -45,6 +50,8 @@ export class ManageWaterInfoComponent implements OnInit {
     this.waterInfoService.addOrUpdate(this.waterInfo).subscribe(data => {
       console.log(data);
       this.isReadOnly = true;
+      this.toastr.success("Water quality data added!", "Success");
+      this.router.navigateByUrl("/manage-water-info'/");
     });
   }
 

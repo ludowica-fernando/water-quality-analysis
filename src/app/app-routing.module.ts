@@ -1,3 +1,4 @@
+import { LineChartWaterQualityComponent } from './line-chart-water-quality/line-chart-water-quality.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LocationListComponent } from './location-list/location-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -13,6 +14,7 @@ import { ChartColumnComponent } from './chart-column/chart-column.component';
 import { LayoutComponent } from './other/layout/layout.component';
 import { LayoutLoginComponent } from './other/layout-login/layout-login.component';
 import { LoginComponent } from './login/login.component';
+import { WaterQualityComponent } from './water-quality/water-quality.component';
 
 const routes: Routes = [
 
@@ -42,6 +44,8 @@ const routes: Routes = [
       { path: 'locations/:id', component: ManageLocationComponent },
 
       { path: 'chart-column', component: ChartColumnComponent },
+      { path: 'water-quality', component: WaterQualityComponent },
+      { path: 'line-chart-water-quality', component: LineChartWaterQualityComponent },
     ]
   },
 

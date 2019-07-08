@@ -31,6 +31,8 @@ import { LoaderComponent } from './other/loader/loader.component';
 import { LoginComponent } from './login/login.component';
 import { httpLoaderInterceptorProvider } from './loader-interceptor';
 import { httpAuthInterceptorProvider } from './auth-interceptor';
+import { WaterQualityComponent } from './water-quality/water-quality.component';
+import { LineChartWaterQualityComponent } from './line-chart-water-quality/line-chart-water-quality.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { httpAuthInterceptorProvider } from './auth-interceptor';
     LayoutComponent,
     ChartColumnComponent,
     LayoutLoginComponent,
-    LoginComponent
+    LoginComponent,
+    WaterQualityComponent,
+    LineChartWaterQualityComponent
   ],
   imports: [
     BrowserModule,

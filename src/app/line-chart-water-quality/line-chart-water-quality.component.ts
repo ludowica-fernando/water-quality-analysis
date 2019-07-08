@@ -1,25 +1,26 @@
+import { WaterQuality } from './../models/water-quality';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { WaterinfoService } from '../services/waterinfo.service';
 import { ChartColumnFilter } from '../models/chart-column-filter';
 import { ChartColumn } from '../models/chart-column';
-import * as moment from 'moment';
 import { LocationService } from '../services/location.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-chart-column',
-  templateUrl: './chart-column.component.html',
-  styleUrls: ['./chart-column.component.css']
+  selector: 'app-line-chart-water-quality',
+  templateUrl: './line-chart-water-quality.component.html',
+  styleUrls: ['./line-chart-water-quality.component.css']
 })
-export class ChartColumnComponent implements OnInit {
+
+export class LineChartWaterQualityComponent implements OnInit {
 
   chartColumnFilter: ChartColumnFilter = new ChartColumnFilter();
   chartColumn: ChartColumn = new ChartColumn();
   locationList = [];
-
   data: any[] = [];
-
   view: any[] = [700, 400];
+  waterQualityList: WaterQuality[] = [];
 
   // options
   showXAxis = true;
@@ -41,6 +42,8 @@ export class ChartColumnComponent implements OnInit {
     this.locationService.getAll().subscribe(data => {
       this.locationList = data;
     });
+
+
   }
 
   onSubmit() {
@@ -66,11 +69,17 @@ export class ChartColumnComponent implements OnInit {
   }
 
   prepare() {
+    let o = {
+      name: "Colombo",
+      value: 25
+    };
 
-    this.data.push({ name: "colour", value: this.chartColumn.colour });
-    this.data.push({ name: "pH", value: this.chartColumn.pH });
-    this.data.push({ name: "rcl", value: this.chartColumn.rcl });
-    this.data.push({ name: "turbidity", value: this.chartColumn.turbidity });
+    let o2 = {
+      name: "Negombo",
+      value: 50
+    };
+
+    this.data.push(o);
 
     this.data = [...this.data];
   }

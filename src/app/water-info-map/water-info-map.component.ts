@@ -35,23 +35,6 @@ export class WaterInfoMapComponent implements OnInit {
       });
 
       map.add(featureLayer);
-
-      // const spatialProperties: esri.SpatialReferenceProperties = {
-      //   wkid: 102100
-      // };
-
-      // const mapViewProperties: esri.MapViewProperties = {
-      //   container: this.mapViewEl.nativeElement,
-      //   map: map,
-      //   extent: {
-      //     xmin: -9177811,
-      //     ymin: 4247000,
-      //     xmax: -9176791,
-      //     ymax: 4247784,
-      //     spatialReference: spatialProperties
-      //   }
-      // };
-
       const mapViewProperties: esri.MapViewProperties = {
         container: this.mapViewEl.nativeElement,
         map: map,

@@ -27,4 +27,9 @@ export class WaterinfoService {
   getChartColumn(chartColumnFilter) {
     return this.http.post<ChartColumn>(this.apiURL + '/chart-column', chartColumnFilter);
   }
+
+  calculateWaterQuality(chartColumnFilter){
+    return this.http.post(this.apiURL + '/water-quality', chartColumnFilter);
+  }
+
 }

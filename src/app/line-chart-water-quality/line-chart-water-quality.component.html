@@ -1,0 +1,35 @@
+<div class="view">
+  <h3>Column Chart</h3>
+  <div class="row">
+    <div class="col-md-3">
+      <form #chartFilterForm="ngForm" (ngSubmit)="onSubmit()" class="mt-4">
+        <div class="form-group">
+          <label for="city">City</label>
+          <select #city="ngModel" [(ngModel)]="chartColumnFilter.city" name="city" id="city" type="text"
+            class="form-control">
+            <option *ngFor="let location of locationList" [value]="location.city"> {{location.city}} - {{location.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dateStart">Date Start</label>
+          <input #dateStart="ngModel" [(ngModel)]="chartColumnFilter.dateStart" name="dateStart" id="dateStart"
+            type="datetime-local" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="dateEnd">Date End</label>
+          <input #dateEnd="ngModel" [(ngModel)]="chartColumnFilter.dateEnd" name="dateEnd" id="dateEnd"
+            type="datetime-local" class="form-control" required>
+        </div>
+        <button class="btn btn-success" [disabled]="!chartFilterForm.valid">Filter</button>
+        <br><br>
+      </form>
+    </div>
+    <div class="col-md">
+      <ngx-charts-bar-vertical [view]="view" [results]="data" [gradient]="gradient" [xAxis]="showXAxis"
+        [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+</div>

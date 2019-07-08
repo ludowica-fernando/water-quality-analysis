@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../services/token-storage.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private authService: AuthService,
     private router: Router,
+    private toastr : ToastrService
   ) { }
 
   ngOnInit() {
@@ -29,10 +31,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.directUser(data);
+          this.toastr.success("Logged In!", "Success");
         },
         error => {
           console.log(error.error.message)
-          // this.toastr.error(error.error.message);
+          this.toastr.error(error.error.message);
         });
   }
 
@@ -47,6 +50,7 @@ export class LoginComponent implements OnInit {
       switch (this.tokenStorage.getAuthority()) {
 
         case 'ROLE_ADMIN':
+
           this.router.navigateByUrl('');
           break;
         case 'ROLE_MM':
@@ -61,6 +65,7 @@ export class LoginComponent implements OnInit {
       }
     }
     else {
+      console.log("Error!");
     }
   }
 

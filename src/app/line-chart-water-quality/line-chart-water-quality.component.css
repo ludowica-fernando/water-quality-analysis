@@ -1,0 +1,14 @@
+.view {
+    height: 90%;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 150px;
+}
+
+.esri-popup .esri-popup-header .esri-title {
+    font-size: 18px;
+    font-weight: bolder;
+}
+.esri-popup .esri-popup-body .esri-popup-content {
+    font-size: 14px;
+}

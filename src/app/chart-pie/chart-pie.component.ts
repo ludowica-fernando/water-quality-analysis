@@ -1,36 +1,24 @@
-import { WaterQuality } from './../models/water-quality';
+import { ChartPie } from './../models/chart-pie';
+import { WaterinfoService } from './../services/waterinfo.service';
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
-import { WaterinfoService } from '../services/waterinfo.service';
 import { ChartColumnFilter } from '../models/chart-column-filter';
-import { ChartColumn } from '../models/chart-column';
 import { LocationService } from '../services/location.service';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
-  selector: 'app-line-chart-water-quality',
-  templateUrl: './line-chart-water-quality.component.html',
-  styleUrls: ['./line-chart-water-quality.component.css']
+  selector: 'app-chart-pie',
+  templateUrl: './chart-pie.component.html',
+  styleUrls: ['./chart-pie.component.css']
 })
-
-export class LineChartWaterQualityComponent implements OnInit {
+export class ChartPieComponent implements OnInit {
 
   chartColumnFilter: ChartColumnFilter = new ChartColumnFilter();
-  chartColumn: ChartColumn = new ChartColumn();
-  locationList = [];
+  chartPie: ChartPie = new ChartPie();
+  cityList = [];
   data: any[] = [];
-  view: any[] = [700, 400];
-  waterQualityList: WaterQuality[] = [];
 
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Percentage';
-  showYAxisLabel = true;
-  yAxisLabel = 'Parameter';
+  view: any[] = [700, 400];
 
   constructor(
     private locationService: LocationService,
@@ -40,10 +28,12 @@ export class LineChartWaterQualityComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.getAll().subscribe(data => {
-      this.locationList = data;
+      // let locationList = data;
+
+      // locationList.forEach(location => this.cityList.push(location.city));
+      // this.cityList = Array.from(new Set(this.cityList));
+      this.cityList = data;
     });
-
-
   }
 
   onSubmit() {
@@ -58,9 +48,10 @@ export class LineChartWaterQualityComponent implements OnInit {
     this.chartColumnFilter.dateStart = dateStart;
     this.chartColumnFilter.dateEnd = dateEnd;
 
-    this.waterInfoService.getChartColumn(this.chartColumnFilter).subscribe(
+    this.waterInfoService.getChartPie(this.chartColumnFilter).subscribe(
       data => {
-        this.chartColumn = data;
+        console.log(data);
+        this.chartPie = data;
         this.prepare();
       },
       error => {
@@ -69,18 +60,16 @@ export class LineChartWaterQualityComponent implements OnInit {
   }
 
   prepare() {
-    let o = {
-      name: "Colombo",
-      value: 25
-    };
-
-    let o2 = {
-      name: "Negombo",
-      value: 50
-    };
-
-    this.data.push(o);
+    
+    this.data = [];
+    this.data.push({ name: "colour", value: this.chartPie.colour });
+    this.data.push({ name: "pH", value: this.chartPie.pH });
+    this.data.push({ name: "rcl", value: this.chartPie.rcl });
+    this.data.push({ name: "turbidity", value: this.chartPie.turbidity });
+    this.data.push({ name: "ec", value: this.chartPie.ec });
+    // this.data.push({ name: "total", value: this.chartPie.total });
 
     this.data = [...this.data];
   }
+
 }

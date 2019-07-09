@@ -1,3 +1,4 @@
+import { ChartPieComponent } from './chart-pie/chart-pie.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,13 +27,13 @@ import { ManageLocationComponent } from './manage-location/manage-location.compo
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutComponent } from './other/layout/layout.component';
 import { ChartColumnComponent } from './chart-column/chart-column.component';
+import { ChartColumnVertical } from './chart-column-vertical/chart-column-vertical.component';
 import { LayoutLoginComponent } from './other/layout-login/layout-login.component';
 import { LoaderComponent } from './other/loader/loader.component';
 import { LoginComponent } from './login/login.component';
 import { httpLoaderInterceptorProvider } from './loader-interceptor';
 import { httpAuthInterceptorProvider } from './auth-interceptor';
 import { WaterQualityComponent } from './water-quality/water-quality.component';
-import { LineChartWaterQualityComponent } from './line-chart-water-quality/line-chart-water-quality.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { LineChartWaterQualityComponent } from './line-chart-water-quality/line-
     LayoutLoginComponent,
     LoginComponent,
     WaterQualityComponent,
-    LineChartWaterQualityComponent
+    ChartColumnVertical,
+    ChartPieComponent
   ],
   imports: [
     BrowserModule,

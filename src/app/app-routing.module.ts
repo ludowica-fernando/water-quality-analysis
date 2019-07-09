@@ -1,4 +1,4 @@
-import { LineChartWaterQualityComponent } from './line-chart-water-quality/line-chart-water-quality.component';
+import { ChartPieComponent } from './chart-pie/chart-pie.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LocationListComponent } from './location-list/location-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -6,7 +6,6 @@ import { ManageWaterInfoComponent } from './manage-water-info/manage-water-info.
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LocationComponent } from './location/location.component';
-import { WaterInfoMapComponent } from './water-info-map/water-info-map.component';
 import { WaterInfoListComponent } from './water-info-list/water-info-list.component';
 import { WaterInfoDetailComponent } from './water-info-detail/water-info-detail.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
@@ -44,8 +43,8 @@ const routes: Routes = [
       { path: 'locations/:id', component: ManageLocationComponent },
 
       { path: 'chart-column', component: ChartColumnComponent },
+      { path: 'chart-pie', component: ChartPieComponent },
       { path: 'water-quality', component: WaterQualityComponent },
-      { path: 'line-chart-water-quality', component: LineChartWaterQualityComponent },
     ]
   },
 

@@ -1,6 +1,8 @@
+import { WaterQuality } from './../models/water-quality';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '../models/location';
+import { filter } from 'rxjs/operators';
 
 
 @Injectable({
@@ -22,5 +24,9 @@ export class LocationService {
 
   addOrUpdate(location) {
     return this.http.post(this.apiURL, location);
+  }
+
+  getWaterQualityByCityAndDate(filter){
+    return this.http.post<WaterQuality[]>(this.apiURL + "/city-data", filter);
   }
 }

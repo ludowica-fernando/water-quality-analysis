@@ -1,9 +1,9 @@
 export class WaterQuality {
-    city : string;
-    waterQuality: number;
+    name : string;
+    percentage: number;
 
     constructor() {
-        this.city = null;
-        this.waterQuality = null;
+        this.name = null;
+        this.percentage = null;
     }
 }

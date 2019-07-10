@@ -29,11 +29,15 @@ export class WaterinfoService {
     return this.http.post<ChartColumn>(this.apiURL + '/chart-column', chartColumnFilter);
   }
 
+  getWaterQualityList(chartColumnFilter) {
+    return this.http.post<WaterInfo[]>(this.apiURL + '/water-quality-list', chartColumnFilter);
+  }
+
   getChartPie(chartColumnFilter) {
     return this.http.post<ChartPie>(this.apiURL + '/chart-pie', chartColumnFilter);
   }
 
-  calculateWaterQuality(chartColumnFilter){
+  calculateWaterQuality(chartColumnFilter) {
     return this.http.post(this.apiURL + '/water-quality', chartColumnFilter);
   }
 

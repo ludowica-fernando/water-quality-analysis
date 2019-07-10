@@ -34,6 +34,7 @@ import { LoginComponent } from './login/login.component';
 import { httpLoaderInterceptorProvider } from './loader-interceptor';
 import { httpAuthInterceptorProvider } from './auth-interceptor';
 import { WaterQualityComponent } from './water-quality/water-quality.component';
+import { WaterQualityListComponent } from './water-quality-list/water-quality-list.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { WaterQualityComponent } from './water-quality/water-quality.component';
     LoginComponent,
     WaterQualityComponent,
     ChartColumnVertical,
-    ChartPieComponent
+    ChartPieComponent,
+    WaterQualityListComponent
   ],
   imports: [
     BrowserModule,

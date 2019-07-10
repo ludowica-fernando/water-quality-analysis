@@ -14,6 +14,8 @@ import { LayoutComponent } from './other/layout/layout.component';
 import { LayoutLoginComponent } from './other/layout-login/layout-login.component';
 import { LoginComponent } from './login/login.component';
 import { WaterQualityComponent } from './water-quality/water-quality.component';
+import { WaterQualityListComponent } from './water-quality-list/water-quality-list.component';
+import { ChartColumnVertical } from './chart-column-vertical/chart-column-vertical.component';
 
 const routes: Routes = [
 
@@ -44,7 +46,9 @@ const routes: Routes = [
 
       { path: 'chart-column', component: ChartColumnComponent },
       { path: 'chart-pie', component: ChartPieComponent },
+      { path: 'chart-column-vertical', component: ChartColumnVertical },
       { path: 'water-quality', component: WaterQualityComponent },
+      { path: 'water-quality-list', component: WaterQualityListComponent },
     ]
   },
 

@@ -83,20 +83,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
               }
             ]
           },
-          {
-            type: "media", // MediaContentElement
-            mediaInfos: [
-              {
-                title: "<b>Sample Image</b>",
-                type: "image",
-                caption: "Water Info",
-                value: {
-                  sourceURL:
-                    "https://www.sunset.com/wp-content/uploads/96006df453533f4c982212b8cc7882f5-800x0-c-default.jpg"
-                }
-              }
-            ]
-          },
         ],
         outFields: ["*"]
       };
@@ -174,63 +160,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
         });
       });
 
-
-      // Executes each time the button is clicked
-      // var doQuery = function () {
-      //   // Clear the results from a previous query
-      //   resultsLayer.removeAll();
-
-      //   // view.ui.add(legend, "top-right");
-
-      //   var loc = self.filter.location;
-      //   var location = ` '${loc}' `
-
-      //   var yearStart = self.filter.year;
-      //   var yearEnd = self.filter.year;
-
-      //   var monthStart = self.month
-      //   var monthEnd = monthStart + 1;
-
-      //   if (monthEnd == 13) {
-      //     monthEnd = 1;
-      //     yearEnd = yearStart + 1;
-      //   }
-
-      //   var startYearStr = ` '${yearStart}-${monthStart}-01' `
-      //   var endYearStr = ` '${yearEnd}-${monthEnd}-01' `
-
-      //   var attributeName = "name ";
-      //   var expressionSignEqual = "= ";
-      //   var attributeDate = "date ";
-      //   var expressionSignBetween = "BETWEEN ";
-      //   var expressionSignAnd = "AND ";
-
-      //   var whereQuery = "";
-
-      //   var whereQuery = attributeName + expressionSignEqual + location + expressionSignAnd +
-      //     attributeDate + expressionSignBetween + startYearStr + expressionSignAnd + endYearStr;
-
-      //   // if (location != null) {
-      //   //   whereQuery += attributeName + expressionSignEqual + location;
-      //   // }
-
-      //   // if (yearStart != null && monthStart != null && yearEnd != null && monthEnd != null) {
-      //   //   whereQuery += attributeDate + expressionSignBetween + startYearStr + expressionSignAnd + endYearStr;
-      //   // }
-
-      //   console.log(whereQuery);
-
-      //   params.where = whereQuery;
-
-      //   // executes the query and calls getResults() once the promise is resolved
-      //   // promiseRejected() is called if the promise is rejected
-
-      //   qTask
-      //     .execute(params)
-      //     .then(getResults)
-      //     .catch(promiseRejected);
-      // }
-
       // Called each time the promise is resolved
 
       var getResults = function (response) {
@@ -265,8 +194,6 @@ export class WaterInfoTimeViewerComponent implements OnInit {
           });
         });
 
-        // print the number of results returned to the user
-        // document.getElementById("printResults").innerHTML = peakResults.length + " results found!";
       }
 
       // Called each time the promise is rejected
@@ -309,24 +236,18 @@ export class WaterInfoTimeViewerComponent implements OnInit {
   }
 
   processHistory() {
-
     this.historyData = [];
-
     let hList = {
       name: this.selectedParameter,
       series: []
     };
-
     this.location.waterInfoSet.forEach(waterInfo => {
-
       let o = {
         name: String(waterInfo.date).split(" ")[0],
         value: waterInfo[this.selectedParameter]
       };
-
       hList.series.push(o);
     });
-
     this.historyData.push(hList);
     this.historyData = [...this.historyData];
   }

@@ -2,7 +2,6 @@ import { WaterQuality } from './../models/water-quality';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '../models/location';
-import { filter } from 'rxjs/operators';
 
 
 @Injectable({

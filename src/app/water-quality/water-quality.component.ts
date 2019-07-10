@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ChartColumnFilter } from '../models/chart-column-filter';
 import { ChartColumn } from '../models/chart-column';
 import * as moment from 'moment';
+import { WaterQuality } from '../models/water-quality';
 
 @Component({
   selector: 'app-water-quality',
@@ -15,18 +16,20 @@ export class WaterQualityComponent implements OnInit {
 
   chartColumnFilter: ChartColumnFilter = new ChartColumnFilter();
   chartColumn: ChartColumn = new ChartColumn();
-  locationList = [];
-  waterValue : any;
+  cityList = [];
+  waterQualityList: WaterQuality[] = [];
 
   constructor(
     private locationService: LocationService,
-    private waterInfoService: WaterinfoService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
     this.locationService.getAll().subscribe(data => {
-      this.locationList = data;
+      let locationList = data;
+
+      locationList.forEach(location => this.cityList.push(location.city));
+      this.cityList = Array.from(new Set(this.cityList));
     });
   }
 
@@ -42,10 +45,9 @@ export class WaterQualityComponent implements OnInit {
     this.chartColumnFilter.dateStart = dateStart;
     this.chartColumnFilter.dateEnd = dateEnd;
 
-    this.waterInfoService.calculateWaterQuality(this.chartColumnFilter).subscribe(
+    this.locationService.getWaterQualityByCityAndDate(this.chartColumnFilter).subscribe(
       data => {
-        console.log(data);
-        this.waterValue = data;
+        this.waterQualityList = data;
       },
       error => {
         this.toastr.error("Not Found!", "Error");

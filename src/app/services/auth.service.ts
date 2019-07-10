@@ -8,20 +8,19 @@ import { JwtResponse } from '../models/jwt-response';
 })
 export class AuthService {
 
-
-  API_URL = '/api/auth';
+  apiUrl = '/api/auth';
 
   constructor(private http: HttpClient) { }
 
   login(loginForm): Observable<JwtResponse> {
 
-    return this.http.post<JwtResponse>(this.API_URL + '/login', { username: loginForm.username, password: loginForm.password });
+    return this.http.post<JwtResponse>(this.apiUrl + '/login', { username: loginForm.username, password: loginForm.password });
   }
 
   register(registerForm): Observable<string> {
 
     registerForm.role = ['user'];
 
-    return this.http.post<string>(this.API_URL + '/register', registerForm);
+    return this.http.post<string>(this.apiUrl + '/register', registerForm);
   }
 }

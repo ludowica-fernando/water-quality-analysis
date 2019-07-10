@@ -4,7 +4,6 @@ import { WaterinfoService } from '../services/waterinfo.service';
 import { ToastrService } from 'ngx-toastr';
 import { ChartColumnFilter } from '../models/chart-column-filter';
 import * as moment from 'moment';
-import { WaterInfo } from '../models/water-info';
 
 @Component({
   selector: 'app-water-quality-list',
@@ -16,7 +15,6 @@ export class WaterQualityListComponent implements OnInit {
   chartColumnFilter: ChartColumnFilter = new ChartColumnFilter();
   locationList = [];
   waterInfoList = [];
-  // waterInfoList: WaterInfo[] = [];
 
   constructor(
     private locationService: LocationService,

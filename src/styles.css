@@ -103,3 +103,10 @@ body {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
+.view {
+    height: 90%;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 150px;
+}

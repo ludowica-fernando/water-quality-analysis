@@ -1,3 +1,31 @@
-<p>
-  location-detail works!
-</p>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <h3>Locations</h3>
+  <form #locationForm="ngForm" (ngSubmit)="onSubmit()" class="mt-4">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="id">Location ID</label>
+        <input #id="ngModel" [(ngModel)]="location.id" name="id" id="id" type="text" class="form-control"
+          [readonly]="true">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input #city="ngModel" [(ngModel)]="location.city" name="city" id="city" type="text" class="form-control col-md-9"
+        required [readonly]="isReadOnly">
+      <div class="invalid-feedback d-block" *ngIf="city.touched && city.invalid"> City is Required </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Sampling Location</label>
+      <input #name="ngModel" [(ngModel)]="location.name" name="name" id="name" type="text" class="form-control col-md-9"
+        required [readonly]="isReadOnly">
+      <div class="invalid-feedback d-block" *ngIf="name.touched && name.invalid"> Sampling Location is Required </div>
+    </div>
+    <div class="btn-group ml-3" role="group">
+      <button class="btn btn-success" [disabled]="!locationForm.valid || isReadOnly">Save</button>
+      <button *ngIf="location.id" type="button" (click)="edit()" class="btn btn-primary">Edit</button>
+    </div>
+
+  </form>
+</main>

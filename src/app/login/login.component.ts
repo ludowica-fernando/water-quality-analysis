@@ -12,11 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
 
   constructor(
-    // private toastr: ToastrService,
     private tokenStorage: TokenStorageService,
     private authService: AuthService,
     private router: Router,
-    private toastr : ToastrService
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -27,22 +26,29 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(loginForm) {
-    this.authService.login(loginForm)
-      .subscribe(
-        data => {
-          this.directUser(data);
-          this.toastr.success("Logged In!", "Success");
-        },
-        error => {
-          console.log(error.error.message)
-          this.toastr.error(error.error.message);
-        });
+
+    if (loginForm.username && loginForm.password) {
+      this.authService.login(loginForm)
+        .subscribe(
+          data => {
+            this.directUser(data);
+            this.toastr.success("Logged In!", "Success");
+          },
+          error => {
+            console.log(error.error.message)
+            this.toastr.error(error.error.message);
+          });
+    }
+    else{
+      this.toastr.error("Empty field(s)!", "Error");
+    }
+
+
+
   }
 
   directUser(data) {
-
     if (data) {
-
       this.tokenStorage.saveToken(data.accessToken);
       this.tokenStorage.saveUsername(data.username);
       this.tokenStorage.saveAuthorities(data.authorities);
@@ -50,7 +56,6 @@ export class LoginComponent implements OnInit {
       switch (this.tokenStorage.getAuthority()) {
 
         case 'ROLE_ADMIN':
-
           this.router.navigateByUrl('');
           break;
         case 'ROLE_MM':

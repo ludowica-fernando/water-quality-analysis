@@ -16,9 +16,7 @@ export class ChartColumnComponent implements OnInit {
   chartColumnFilter: ChartColumnFilter = new ChartColumnFilter();
   chartColumn: ChartColumn = new ChartColumn();
   locationList = [];
-
   data: any[] = [];
-
   view: any[] = [700, 400];
 
   // options

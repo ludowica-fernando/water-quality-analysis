@@ -25,11 +25,17 @@
         <br><br>
       </form>
     </div>
-    <div class="col-md">
+    <div class="col-md-3">
       <ngx-charts-bar-vertical [view]="view" [results]="data" [gradient]="gradient" [xAxis]="showXAxis"
         [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
       </ngx-charts-bar-vertical>
+    </div>
+    <div class="container">
+      <h2>Basic Panel</h2>
+      <div class="panel panel-default">
+        <div *ngIf="averagePercentage" class="panel-body"><h1>{{ averagePercentage | number: '1.2-2' }} %</h1></div>
+      </div>
     </div>
   </div>
 </div>

@@ -19,6 +19,8 @@ export class ChartColumnVertical implements OnInit {
   data: any[] = [];
   view: any[] = [700, 400];
 
+  averagePercentage: number = 0;
+
   // options
   showXAxis = true;
   showYAxis = true;
@@ -72,7 +74,13 @@ export class ChartColumnVertical implements OnInit {
         value: waterQuality.percentage
       };
       this.data.push(waterData);
+
+      let temp = this.averagePercentage;
+      this.averagePercentage = temp + waterQuality.percentage;
     });
+
     this.data = [...this.data];
+
+    this.averagePercentage = (this.averagePercentage / this.waterQualityList.length);
   }
 }

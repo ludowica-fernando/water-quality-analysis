@@ -1,13 +1,16 @@
 <div class="view">
   <h3>Column Chart</h3>
+
   <div class="row">
+
     <div class="col-md-3">
       <form #chartFilterForm="ngForm" (ngSubmit)="onSubmit()" class="mt-4">
+
         <div class="form-group">
           <label for="city">City</label>
           <select #city="ngModel" [(ngModel)]="chartColumnFilter.city" name="city" id="city" type="text"
             class="form-control">
-            <option *ngFor="let city of cityList" [value]="city"> {{city}}
+            <option *ngFor="let location of locationList" [value]="location.city"> {{location.city}} - {{location.name}}
             </option>
           </select>
         </div>
@@ -21,26 +24,22 @@
           <input #dateEnd="ngModel" [(ngModel)]="chartColumnFilter.dateEnd" name="dateEnd" id="dateEnd"
             type="datetime-local" class="form-control" required>
         </div>
+
         <button class="btn btn-success" [disabled]="!chartFilterForm.valid">Filter</button>
         <br><br>
       </form>
-    </div>
-    <div class="col-md-3">
-      <ngx-charts-bar-vertical [view]="view" [results]="data" [gradient]="gradient" [xAxis]="showXAxis"
-        [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
-      </ngx-charts-bar-vertical>
+
     </div>
 
-  </div>
-  <div class="row">
-    <div class="container">
-      <h2>Overall Percentage of Water Quality</h2>
-      <div class="panel panel-default">
-        <div *ngIf="averagePercentage" class="panel-body">
-          <h1>{{ averagePercentage | number: '1.2-2' }} %</h1>
-        </div>
-      </div>
+    <div class="col-md-3">
+      <ngx-charts-line-chart [view]="view" [results]="historyData" [gradient]="gradient" [xAxis]="showXAxis"
+        [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
+      </ngx-charts-line-chart>
     </div>
+  </div>
+
+  <div *ngIf="chartColumnFilter">
+    {{chartColumnFilter.city}} Date Between {{chartColumnFilter.dateStart}} and {{chartColumnFilter.dateEnd}}
   </div>
 </div>

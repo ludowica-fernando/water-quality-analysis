@@ -24,16 +24,18 @@
           <input #dateEnd="ngModel" [(ngModel)]="chartColumnFilter.dateEnd" name="dateEnd" id="dateEnd"
             type="datetime-local" class="form-control" required>
         </div>
+        <div class="btn-group" role="group">
+          <button class="btn btn-success" [disabled]="!chartFilterForm.valid">Filter</button>
+          <button class="btn btn-success" (click)="captureScreen()">Save Table</button>
+        </div>
 
-        <button class="btn btn-success" [disabled]="!chartFilterForm.valid">Filter</button>
         <br><br>
       </form>
 
     </div>
 
     <div class="col-md">
-
-      <table class="table table-bordered text-center mt-5 ml-4">
+      <table class="table table-bordered text-center mt-5 ml-4" id="contentToConvert">
         <thead>
           <tr>
             <th>#</th>
@@ -41,6 +43,7 @@
             <th>colour</th>
             <th>turbidity</th>
             <th>rcl</th>
+            <th>Remarks</th>
           </tr>
         </thead>
         <tbody>
@@ -50,12 +53,15 @@
             <td [ngClass]="{'bg-danger': w.colour >= '15' }">{{w.colour}}</td>
             <td [ngClass]="{'bg-danger': w.turbidity >= '2' }">{{w.turbidity}}</td>
             <td [ngClass]="{'bg-danger': w.rcl >= '1' }">{{w.rcl}}</td>
+            <td>
+              <div
+                *ngIf="6.5 >= w.pH && w.pH >= '8.5' || w.colour >= '15' || w.turbidity >= '2' || w.rcl >= '1'; else elseBlock">
+                Highlighted parameters are not in the acceptable range</div>
+              <ng-template #elseBlock>All parameters in acceptable range</ng-template>
+            </td>
           </tr>
         </tbody>
       </table>
-
     </div>
-
   </div>
-
 </div>

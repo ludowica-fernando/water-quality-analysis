@@ -21,19 +21,23 @@
           <input #dateEnd="ngModel" [(ngModel)]="chartColumnFilter.dateEnd" name="dateEnd" id="dateEnd"
             type="datetime-local" class="form-control" required>
         </div>
-        <button class="btn btn-success" [disabled]="!waterQualityForm.valid">Filter</button>
+        <div class="btn-group" role="group">
+          <button class="btn btn-success" [disabled]="!waterQualityForm.valid">Filter</button>
+          <button class="btn btn-success" (click)="captureScreen()">Save Table</button>
+        </div>
+
         <br><br>
       </form>
     </div>
 
     <div class="col-md">
-
-      <table class="table table-bordered text-center mt-5 ml-4">
+      <table class="table table-bordered text-center mt-5 ml-4" id="contentToConvert">
         <thead>
           <tr>
-            <th>#</th>
+            <th>Sample ID</th>
             <th>Name</th>
             <th>Percentage</th>
+            <th>Remark</th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +45,7 @@
             <td>{{i}}</td>
             <td>{{w.name}}</td>
             <td [ngClass]="{'bg-danger': w.percentage <= '50' }">{{ w.percentage | number: '1.2-2' }} % </td>
+            <td>{{w.renark}}</td>
           </tr>
         </tbody>
       </table>

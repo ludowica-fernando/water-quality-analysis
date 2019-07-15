@@ -1,47 +1,61 @@
-import { WaterQuality } from '../models/water-quality';
+import { ChartLine } from './../models/chart-line';
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
 import { ChartColumnFilter } from '../models/chart-column-filter';
 import { LocationService } from '../services/location.service';
+import { WaterinfoService } from '../services/waterinfo.service';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
-  selector: 'app-chart-column-vertical',
-  templateUrl: './chart-column-vertical.component.html',
-  styleUrls: ['./chart-column-vertical.component.css']
+  selector: 'app-chart-line',
+  templateUrl: './chart-line.component.html',
+  styleUrls: ['./chart-line.component.css']
 })
-
-export class ChartColumnVertical implements OnInit {
+export class ChartLineComponent implements OnInit {
 
   chartColumnFilter: ChartColumnFilter = new ChartColumnFilter();
-  waterQualityList: WaterQuality[] = [];
-  cityList = [];
+  chartLine: ChartLine = new ChartLine();
+  locationList = [];
   data: any[] = [];
   view: any[] = [700, 400];
+  selectedParameter: string = 'pH'
 
-  averagePercentage: number = 0;
+  location: Location = new Location();
+
+  historyData: any[] = [];
 
   // options
+  // showXAxis = true;
+  // showYAxis = true;
+  // gradient = false;
+  // showLegend = true;
+  // showXAxisLabel = true;
+  // xAxisLabel = 'Percentage';
+  // showYAxisLabel = true;
+  // yAxisLabel = 'Parameter';
+
   showXAxis = true;
   showYAxis = true;
+  showDataLabel = true;
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Percentage';
+  xAxisLabel = 'Date';
   showYAxisLabel = true;
-  yAxisLabel = 'Parameter';
+  yAxisLabel = 'Value';
+
+  // line, area
+  autoScale = true;
 
   constructor(
     private locationService: LocationService,
+    private waterInfoService: WaterinfoService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
     this.locationService.getAll().subscribe(data => {
-      let locationList = data;
-
-      locationList.forEach(location => this.cityList.push(location.city));
-      this.cityList = Array.from(new Set(this.cityList));
+      this.locationList = data;
     });
   }
 
@@ -57,9 +71,10 @@ export class ChartColumnVertical implements OnInit {
     this.chartColumnFilter.dateStart = dateStart;
     this.chartColumnFilter.dateEnd = dateEnd;
 
-    this.locationService.getWaterQualityByCityAndDate(this.chartColumnFilter).subscribe(
+    this.waterInfoService.getChartLine(this.chartColumnFilter).subscribe(
       data => {
-        this.waterQualityList = data;
+        this.chartLine = data;
+        console.log(data);
         this.prepare();
       },
       error => {
@@ -69,20 +84,12 @@ export class ChartColumnVertical implements OnInit {
 
   prepare() {
 
-    let total = 0;
-
-    this.waterQualityList.forEach(waterQuality => {
-      let waterData = {
-        name: waterQuality.name,
-        value: waterQuality.percentage
-      };
-      this.data.push(waterData);
-
-      let temp = total;
-      total = temp + waterQuality.percentage;
-    });
+    this.data.push({ name: "colour", value: this.chartLine.colour });
+    this.data.push({ name: "pH", value: this.chartLine.pH });
+    this.data.push({ name: "rcl", value: this.chartLine.rcl });
+    this.data.push({ name: "turbidity", value: this.chartLine.turbidity });
 
     this.data = [...this.data];
-    this.averagePercentage = (total / this.waterQualityList.length);
   }
+
 }

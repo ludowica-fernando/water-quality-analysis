@@ -25,6 +25,8 @@
     "core-js": "^2.5.4",
     "d3": "^5.9.4",
     "esri-loader": "^2.9.2",
+    "html2canvas": "^1.0.0-rc.3",
+    "jspdf": "^1.5.3",
     "moment": "^2.24.0",
     "ng5-slider": "^1.1.14",
     "ngx-charts": "^3.0.2",

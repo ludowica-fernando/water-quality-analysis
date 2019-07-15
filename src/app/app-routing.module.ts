@@ -1,3 +1,4 @@
+import { ChartLineComponent } from './chart-line/chart-line.component';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { ChartColumnVertical } from './chart-column-vertical/chart-column-vertical.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -38,6 +39,7 @@ const routes: Routes = [
       { path: 'locations/:id', component: LocationDetailComponent },
 
       { path: 'chart-column', component: ChartColumnComponent },
+      { path: 'chart-line', component: ChartLineComponent },
       { path: 'chart-column-vertical', component: ChartColumnVertical },
       { path: 'water-quality', component: WaterQualityComponent },
       { path: 'water-quality-list', component: WaterQualityListComponent },

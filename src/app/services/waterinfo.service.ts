@@ -1,3 +1,4 @@
+import { ChartLine } from './../models/chart-line';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WaterInfo } from '../models/water-info';
@@ -33,8 +34,8 @@ export class WaterinfoService {
     return this.http.post<WaterInfo[]>(this.apiURL + '/water-quality-list', chartColumnFilter);
   }
 
-  getChartPie(chartColumnFilter) {
-    return this.http.post<ChartPie>(this.apiURL + '/chart-pie', chartColumnFilter);
+  getChartLine(chartColumnFilter) {
+    return this.http.post<ChartLine>(this.apiURL + '/chart-line', chartColumnFilter);
   }
 
   calculateWaterQuality(chartColumnFilter) {

@@ -42,7 +42,7 @@ const routes: Routes = [
       { path: 'chart-line', component: ChartLineComponent },
       { path: 'chart-column-vertical', component: ChartColumnVertical },
       { path: 'water-quality', component: WaterQualityComponent },
-      { path: 'water-quality-list', component: WaterQualityListComponent },
+      { path: 'water-quality-list', component: WaterQualityListComponent }
     ]
   },
 

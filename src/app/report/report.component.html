@@ -1,0 +1,23 @@
+<div class="container">
+  <form #reportForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="city">City</label>
+      <select #city="ngModel" [(ngModel)]="report.city" name="city" id="city" type="text"
+        class="form-control">
+        <option *ngFor="let location of locationList" [value]="location.city"> {{location.city}} - {{location.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="dateStart">Date Start</label>
+      <input #dateStart="ngModel" [(ngModel)]="report.dateStart" name="dateStart" id="dateStart"
+        type="datetime-local" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="dateEnd">Date End</label>
+      <input #dateEnd="ngModel" [(ngModel)]="report.dateEnd" name="dateEnd" id="dateEnd"
+        type="datetime-local" class="form-control" required>
+    </div>
+    <button class="btn btn-success" [disabled]="!reportForm.valid">Filter</button>
+  </form>
+</div>

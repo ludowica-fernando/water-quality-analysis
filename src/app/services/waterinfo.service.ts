@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WaterInfo } from '../models/water-info';
 import { ChartColumn } from '../models/chart-column';
-import { ChartPie } from '../models/chart-pie';
+import { Report } from '../models/report';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,10 @@ export class WaterinfoService {
     return this.http.post<ChartColumn>(this.apiURL + '/chart-column', chartColumnFilter);
   }
 
+  getReportData(chartColumnFilter) {
+    return this.http.post<Report>(this.apiURL + '/chart-column', chartColumnFilter);
+  }
+
   getWaterQualityList(chartColumnFilter) {
     return this.http.post<WaterInfo[]>(this.apiURL + '/water-quality-list', chartColumnFilter);
   }
@@ -42,5 +46,7 @@ export class WaterinfoService {
     return this.http.post(this.apiURL + '/water-quality', chartColumnFilter);
   }
 
-
+  getWaterInfoByLocationAndDate(chartColumnFilter){
+    return this.http.post<WaterInfo[]>(this.apiURL + '/report-data', chartColumnFilter);
+  }
 }

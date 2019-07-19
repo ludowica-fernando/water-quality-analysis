@@ -5,7 +5,6 @@
 
     <div class="col-md-3">
       <form #chartFilterForm="ngForm" (ngSubmit)="onSubmit()" class="mt-4">
-
         <div class="form-group">
           <label for="city">City</label>
           <select #city="ngModel" [(ngModel)]="chartColumnFilter.city" name="city" id="city" type="text"

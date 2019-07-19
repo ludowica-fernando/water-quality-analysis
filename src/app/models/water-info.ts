@@ -9,7 +9,8 @@ export class WaterInfo {
     pH: number;
     rcl: number;
     turbidity: number;
-    date: Date;
+    //date: Date;
+    date : string;
     location: Location = new Location();
 
     constructor() {
